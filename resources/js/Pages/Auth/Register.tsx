@@ -1,13 +1,11 @@
 import Back from "@/Components/Back";
-import Checkbox from "@/Components/Checkbox";
 import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
 import { Button } from "@/Components/ui/button";
+import { Checkbox } from "@/Components/ui/checkbox";
+import { Input } from "@/Components/ui/input";
+import { Label } from "@/Components/ui/label";
 import AuthLayout from "@/Layouts/AuthLayout";
-import GuestLayout from "@/Layouts/GuestLayout";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 
 export default function Register() {
@@ -45,15 +43,17 @@ export default function Register() {
                         </h1>
                     </div>
                     <form onSubmit={submit} className="flex flex-col gap-4">
-                        <div>
-                            <InputLabel htmlFor="email" value="Email" />
+                        <div className="flex flex-col gap-2">
+                            <Label htmlFor="email" className="font-bold">
+                                Email
+                            </Label>
 
-                            <TextInput
+                            <Input
+                                className="block w-full focus:ring-primary focus:border-none bg-white border border-gray-300 rounded-full shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
                                 id="email"
                                 type="email"
                                 name="email"
                                 value={data.email}
-                                className="mt-1 block w-full"
                                 autoComplete="username"
                                 onChange={(e) =>
                                     setData("email", e.target.value)
@@ -67,16 +67,17 @@ export default function Register() {
                             />
                         </div>
 
-                        <div>
-                            <InputLabel htmlFor="username" value="Username" />
+                        <div className="flex flex-col gap-2">
+                            <Label className="font-bold" htmlFor="username">
+                                Username
+                            </Label>
 
-                            <TextInput
+                            <Input
+                                className="block w-full focus:ring-primary focus:border-none bg-white border border-gray-300 rounded-full shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
                                 id="username"
                                 name="username"
                                 value={data.username}
-                                className="mt-1 block w-full"
                                 autoComplete="username"
-                                isFocused={true}
                                 onChange={(e) =>
                                     setData("username", e.target.value)
                                 }
@@ -89,19 +90,17 @@ export default function Register() {
                             />
                         </div>
 
-                        <div>
-                            <InputLabel
-                                htmlFor="notelepon"
-                                value="No Telepon"
-                            />
+                        <div className="flex flex-col gap-2">
+                            <Label className="font-bold" htmlFor="notelepon">
+                                No Telepon
+                            </Label>
 
-                            <TextInput
+                            <Input
+                                className="block w-full focus:ring-primary focus:border-none bg-white border border-gray-300 rounded-full shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
                                 id="notelepon"
                                 name="notelepon"
                                 value={data.notelepon}
-                                className="mt-1 block w-full"
                                 autoComplete="notelepon"
-                                isFocused={true}
                                 onChange={(e) =>
                                     setData("notelepon", e.target.value)
                                 }
@@ -114,15 +113,17 @@ export default function Register() {
                             />
                         </div>
 
-                        <div>
-                            <InputLabel htmlFor="password" value="Password" />
+                        <div className="flex flex-col gap-2">
+                            <Label className="font-bold" htmlFor="password">
+                                Password
+                            </Label>
 
-                            <TextInput
+                            <Input
+                                className="block w-full focus:ring-primary focus:border-none bg-white border border-gray-300 rounded-full shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
                                 id="password"
                                 type="password"
                                 name="password"
                                 value={data.password}
-                                className="mt-1 block w-full"
                                 autoComplete="new-password"
                                 onChange={(e) =>
                                     setData("password", e.target.value)
@@ -136,18 +137,20 @@ export default function Register() {
                             />
                         </div>
 
-                        <div>
-                            <InputLabel
+                        <div className="flex flex-col gap-2">
+                            <Label
+                                className="font-bold"
                                 htmlFor="password_confirmation"
-                                value="Confirm Password"
-                            />
+                            >
+                                Confirm Password
+                            </Label>
 
-                            <TextInput
+                            <Input
+                                className="block w-full focus:ring-primary focus:border-none bg-white border border-gray-300 rounded-full shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
                                 id="password_confirmation"
                                 type="password"
                                 name="password_confirmation"
                                 value={data.password_confirmation}
-                                className="mt-1 block w-full"
                                 autoComplete="new-password"
                                 onChange={(e) =>
                                     setData(
@@ -166,12 +169,12 @@ export default function Register() {
 
                         <div className="flex items-center gap-2">
                             <Checkbox name="terms" id="terms" />
-                            <InputLabel htmlFor="terms">
-                                Agree to join
-                            </InputLabel>
+                            <Label htmlFor="terms">Agree to join</Label>
                         </div>
 
-                        <Button className="w-full">Register</Button>
+                        <Button className="w-full rounded-full">
+                            Register
+                        </Button>
                     </form>
                 </div>
                 <footer className="flex gap-2">

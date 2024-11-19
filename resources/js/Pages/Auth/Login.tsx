@@ -3,10 +3,10 @@ import { Link, useForm } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
 import { FormEventHandler } from "react";
 import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import TextInput from "@/Components/TextInput";
 import AuthLayout from "@/Layouts/AuthLayout";
 import Back from "@/Components/Back";
+import { Label } from "@/Components/ui/label";
+import { Input } from "@/Components/ui/input";
 
 export default function Login({
     status,
@@ -52,17 +52,18 @@ export default function Login({
                         </h1>
                     </div>
                     <form onSubmit={submit} className="flex flex-col gap-4">
-                        <div>
-                            <InputLabel htmlFor="email" value="Email" />
+                        <div className="flex flex-col gap-2">
+                            <Label htmlFor="email" className="font-bold">
+                                Email
+                            </Label>
 
-                            <TextInput
+                            <Input
                                 id="email"
                                 type="email"
                                 name="email"
                                 value={data.email}
-                                className="mt-1 block w-full"
+                                className="block w-full focus:ring-primary focus:border-none bg-white border border-gray-300 rounded-full shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
                                 autoComplete="username"
-                                isFocused={true}
                                 onChange={(e) =>
                                     setData("email", e.target.value)
                                 }
@@ -74,39 +75,38 @@ export default function Login({
                             />
                         </div>
 
-                        <div>
-                            <InputLabel htmlFor="password" value="Password" />
+                        <div className="flex flex-col gap-2">
+                            <Label htmlFor="password" className="font-bold">
+                                Password
+                            </Label>
 
-                            <TextInput
+                            <Input
                                 id="password"
                                 type="password"
                                 name="password"
                                 value={data.password}
-                                className="mt-1 block w-full"
+                                className="block w-full focus:ring-primary focus:border-none bg-white border border-gray-300 rounded-full shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
                                 autoComplete="current-password"
                                 onChange={(e) =>
                                     setData("password", e.target.value)
                                 }
                             />
 
-                            <InputError
-                                message={errors.password}
-                                className="mt-2"
-                            />
+                            <InputError message={errors.password} />
                         </div>
 
                         <div className="flex items-center justify-end">
                             {canResetPassword && (
                                 <Link
                                     href={route("password.request")}
-                                    className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    className="rounded-full text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                 >
                                     Forgot your password?
                                 </Link>
                             )}
                         </div>
 
-                        <Button className="w-full">Login</Button>
+                        <Button className="w-full rounded-full">Login</Button>
                     </form>
                 </div>
                 <footer className="flex gap-2">

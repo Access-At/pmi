@@ -14,7 +14,7 @@ export default function AuthLayout({ children, title }: Props) {
 
             <div className="flex w-full h-screen bg-white flex-col md:flex-row">
                 {children}
-                <section className="hidden md:block">
+                <section className="hidden lg:block flex-1">
                     <img
                         src="assets/images/background.png"
                         alt="images"
