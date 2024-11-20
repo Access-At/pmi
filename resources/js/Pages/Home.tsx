@@ -1,4 +1,4 @@
-import Banner from "@/Components/section/home/banner";
+import Banner from "@/Components/section/home/Banner";
 import GuestLayout from "@/Layouts/GuestLayout";
 
 export default function Home() {

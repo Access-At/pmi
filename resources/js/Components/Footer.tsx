@@ -7,7 +7,7 @@ import { socialMedia } from "@/Constant/social-media";
 export default function Footer() {
     return (
         <footer className="bg-gradient-to-t from-primary to-secondary">
-            <div className="container flex px-6 py-10 text-white gap-10 lg:flex-row flex-col md:items-start items-center mx-auto">
+            <div className="lg:container flex px-6 py-10 text-white gap-10 lg:flex-row flex-col md:items-start items-center mx-auto">
                 <div className="flex flex-1 flex-col gap-1 text-center md:text-left mb-6 md:mb-0">
                     <div className="flex items-center justify-center md:justify-start gap-3">
                         <img
