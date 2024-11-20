@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class StockDetail extends Model
 {
-    protected $casts = [
-        'blood_category' => BloodCategory::class,
-    ];
+    protected $guarded = [];
+
+    // protected $casts = [
+    //     'blood_category' => BloodCategory::class,
+    // ];
 }

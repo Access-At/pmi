@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ScheduleResource extends JsonResource
+class DetailStockResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +14,13 @@ class ScheduleResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        // $totalAmount = $this->collection->sum('amount');
+
         return [
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'description' => $this->description,
-            'location' => $this->location,
+            'type' => $this->blood_type,
+            'category' => $this->blood_category,
+            'amount' => $this->amount,
+            // 'total' => $totalAmount,
         ];
     }
 }
