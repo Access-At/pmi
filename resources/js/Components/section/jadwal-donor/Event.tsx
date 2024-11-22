@@ -4,7 +4,7 @@ import { CalendarDaysIcon } from "lucide-react";
 
 export default function EventSection() {
     return (
-        <section className="lg:container mx-auto px-4 md:px-6 lg:px-8 space-y-4 relative top-[-25rem]">
+        <section className="lg:container mx-auto px-4 md:px-6 lg:px-8 space-y-4 my-10">
             <h1 className="text-2xl md:text-3xl font-bold">Event</h1>
             <Card className="flex px-4 md:px-6 py-3 items-center gap-x-20 justify-between">
                 <div className="flex flex-col md:flex-row items-start gap-4 w-full">
