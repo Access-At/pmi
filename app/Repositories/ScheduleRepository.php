@@ -8,7 +8,7 @@ class ScheduleRepository
 {
     public static function getSchedules()
     {
-        $query = Schedule::get();
+        $query = Schedule::take(3)->get();
         return $query;
     }
 

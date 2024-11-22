@@ -21,4 +21,4 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
-# /request_api
+/request_api

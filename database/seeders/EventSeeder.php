@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Event;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -27,7 +26,7 @@ class EventSeeder extends Seeder
                 'start_time' => $faker->dateTimeBetween('now', '+1 week'),
                 'end_time' => $faker->dateTimeBetween('+1 week', '+2 week'),
                 'date' => $faker->date('Y-m-d', 'now'),
-                'location' => $faker->address,
+                'location' => $faker->city,
                 'lat' => $faker->latitude,
                 'long' => $faker->longitude,
                 'image' => 'https://picsum.photos/200/300',
