@@ -14,6 +14,7 @@ Route::prefix('/')->group(function () {
     Route::get('privacy-policy', [HomeController::class, "privacyPolicy"])->name("privacy-policy");
     Route::get('jadwal-donor', [HomeController::class, "jadwalDonor"])->name("jadwal-donor");
     Route::get('stok-darah', [HomeController::class, "stokDarah"])->name("stok-darah");
+    Route::get('stok-darah/{slug}', [HomeController::class, "stokDarah"])->name("stok-darah");
 });
 
 Route::get('/dashboard', function () {

@@ -28,9 +28,12 @@ class HomeController extends Controller
         ]);
     }
 
-    public function stokDarah()
+    public function stokDarah($slug)
     {
-        return Inertia::render('StokDarah');
+        $stoks = ScheduleService::getSchedulesBySlug($slug);
+        return Inertia::render('StokDarah', [
+            'stoks' => $stoks
+        ]);
     }
 
     public function termsAndConditions()

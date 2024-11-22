@@ -1,39 +1,67 @@
-import { jadwalDonor } from "@/Constant/jadwal-donor";
+import { Card, CardContent } from "@/Components/ui/card";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/Components/ui/carousel";
 import EachUtil from "@/lib/EachUtil";
+import { ScheduleResponseType } from "@/schemas/response-schema";
+import { Link, usePage } from "@inertiajs/react";
 
 export default function JadwalDonorSection() {
+    const { schedules } = usePage().props;
     return (
-        <section className="lg:container mx-auto px-6 flex flex-col gap-4 h-fit">
-            <h1 className="text-3xl font-bold">Jadwal Donor Darah</h1>
-            <div className="flex flex-col items-center lg:justify-center md:flex-row flex-wrap gap-4">
-                <EachUtil
-                    of={jadwalDonor}
-                    render={(item, index) => (
-                        <span key={index} className="h-[26rem]">
-                            <div className="relative z-10 top-[3rem] left-[1.5rem] md:top-[2.5rem] xl:top-[3rem] md:left-[1rem]">
-                                <img
-                                    src={item.urlImage}
-                                    alt={item.name}
-                                    width={250}
-                                    className="rounded-lg"
-                                />
-                                <div className="relative bottom-[5rem] left-8 -space-y-2">
-                                    <h6 className="font-semibold">
-                                        {item.name}
-                                    </h6>
-                                    <p>{item.place}</p>
+        <div className="lg:container mx-auto px-6 flex flex-col gap-4 h-fit">
+            <h1 className="text-4xl font-bold mb-8">Jadwal Donor Darah</h1>
+            <Carousel
+                opts={{
+                    align: "start",
+                    loop: true,
+                }}
+                className="w-full"
+            >
+                <CarouselContent className="-ml-2 md:-ml-4">
+                    <EachUtil
+                        of={schedules.data}
+                        render={(item: ScheduleResponseType, index) => (
+                            <CarouselItem
+                                key={index}
+                                className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
+                            >
+                                {/* <Link href={`/stok-darah/${item.slug}`}> */}
+                                <div className="relative transform transition-transform hover:scale-105">
+                                    <Card className="relative overflow-hidden group">
+                                        <div className="absolute inset-0 bg-red-600 transform rotate-3 scale-105 -z-10" />
+                                        <CardContent className="p-0">
+                                            <div className="relative h-[400px] w-full">
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.title}
+                                                    className="w-full object-cover"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                                <div className="absolute bottom-0 left-0 p-6 text-white">
+                                                    <h2 className="text-2xl font-bold mb-1">
+                                                        {item.title}
+                                                    </h2>
+                                                    <p className="text-lg opacity-90">
+                                                        {item.location}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
                                 </div>
-                            </div>
-                            <img
-                                src="assets/images/Background-PMI.png"
-                                alt="background"
-                                width={290}
-                                className="relative top-[-22rem]"
-                            />
-                        </span>
-                    )}
-                />
-            </div>
-        </section>
+                                {/* </Link> */}
+                            </CarouselItem>
+                        )}
+                    />
+                </CarouselContent>
+                <CarouselPrevious className="hidden lg:block" />
+                <CarouselNext className="hidden lg:block" />
+            </Carousel>
+        </div>
     );
 }

@@ -19,7 +19,8 @@ class ScheduleResource extends JsonResource
             'slug' => $this->slug,
             'description' => $this->description,
             'location' => $this->location,
-            'image' => asset("storage/schedules/" . $this->image),
+            // 'image' => asset("storage/schedules/" . $this->image),
+            'image' => $this->image,
         ];
     }
 }

@@ -1,37 +1,53 @@
 import { Button } from "@/Components/ui/button";
-import { Card } from "@/Components/ui/card";
+import { Card, CardContent } from "@/Components/ui/card";
+import EachUtil from "@/lib/EachUtil";
+import { EventResponseType } from "@/schemas/response-schema";
+import { usePage } from "@inertiajs/react";
 import { CalendarDaysIcon } from "lucide-react";
 
 export default function EventSection() {
+    const { events } = usePage().props;
     return (
         <section className="lg:container mx-auto px-4 md:px-6 lg:px-8 space-y-4 my-10">
             <h1 className="text-2xl md:text-3xl font-bold">Event</h1>
-            <Card className="flex px-4 md:px-6 py-3 items-center gap-x-20 justify-between">
-                <div className="flex flex-col md:flex-row items-start gap-4 w-full">
-                    <div className="bg-primary/30 rounded-full p-2 md:p-3 w-fit">
-                        <CalendarDaysIcon className="text-primary" />
-                    </div>
-                    <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center w-full gap-2 md:gap-0">
-                        <div className="flex flex-col">
-                            <h3 className="font-bold text-lg md:text-xl">
-                                Itc Cempaka Mas Donor Darah
-                            </h3>
-                            <p className="text-sm md:text-base text-muted-foreground">
-                                Kamis, 20 November 2023
-                            </p>
-                        </div>
-                        <p className="text-sm md:text-base text-muted-foreground">
-                            Kamis, 09:00 - 14:00
-                        </p>
-                        <p className="text-sm md:text-base text-muted-foreground">
-                            Jakarta Pusat
-                        </p>
-                    </div>
-                </div>
-                <Button className="text-xs md:text-sm bg-gray-400 rounded-full px-6 md:px-8">
-                    Ingatkan Saya
-                </Button>
-            </Card>
+            <EachUtil
+                of={events.data}
+                render={(item: EventResponseType, index) => (
+                    <Card className="w-full">
+                        <CardContent className="p-4">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                                {/* Icon Section */}
+                                <div className="flex-shrink-0 w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                                    <CalendarDaysIcon className="w-6 h-6 text-red-600" />
+                                </div>
+
+                                {/* Content Section */}
+                                <div className="flex-grow space-y-1">
+                                    <h3 className="text-lg font-semibold">
+                                        {item.title}
+                                    </h3>
+                                    <p className="text-sm text-muted-foreground">
+                                        {item.date}
+                                    </p>
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground">
+                                        <span>{item.time}</span>
+                                        <span className="hidden sm:inline">
+                                            •
+                                        </span>
+                                        <span>{item.location}</span>
+                                    </div>
+                                </div>
+
+                                <div className="w-full sm:w-auto mt-4 sm:mt-0">
+                                    <Button className="w-full sm:w-auto bg-gray-400 rounded-full">
+                                        Ingkatkan Saya
+                                    </Button>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+                )}
+            />
         </section>
     );
 }
