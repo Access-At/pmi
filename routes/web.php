@@ -54,4 +54,8 @@ Route::get('/jadwal-donor', function () {
     return Inertia::render('JadwalDonor');
 });
 
+Route::get("/stok-darah", function () {
+    return Inertia::render("StockDarah");
+});
+
 require __DIR__ . '/auth.php';

@@ -1,6 +1,6 @@
 export default function FirstContentSection() {
     return (
-        <section className="lg:container flex items-center justify-between mx-auto py-10 relative w-full">
+        <section className="lg:container flex items-center justify-between mx-auto py-10 w-full">
             <div className="flex flex-col px-6 gap-3 py-52">
                 <h2 className="text-[1.25rem] md:text-[2.5rem] xl:text-[5rem] font-bold md:max-w-sm xl:max-w-3xl">
                     Infromasi Donor Darah yang Lengkap
@@ -10,7 +10,7 @@ export default function FirstContentSection() {
                     dengan lokasi dan jadwal.
                 </p>
             </div>
-            <div className="absolute z-0 right-0">
+            <div className="relative z-0 right-0">
                 <img
                     src="assets/images/people.png"
                     alt="people"

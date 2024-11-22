@@ -2,8 +2,8 @@ import { Button } from "@/Components/ui/button";
 
 export default function BannerSection() {
     return (
-        <section className="relative my-10 lg:container mx-auto">
-            <div className="absolute top-10 lg:top-24 z-10">
+        <section className="my-10 lg:container mx-auto">
+            <div className="relative z-10">
                 <div className="flex flex-col px-6 gap-3 md:gap-6 lg:gap-9">
                     <p className="text-3xl md:text-4xl lg:text-5xl">
                         Welcome !
@@ -25,7 +25,7 @@ export default function BannerSection() {
             <img
                 src="assets/images/banner.png"
                 alt="Tangan dan Kantong Darah"
-                className="w-full"
+                className="w-full relative top-[-12rem] md:top-[-18rem] lg:top-[-24rem]"
             />
         </section>
     );

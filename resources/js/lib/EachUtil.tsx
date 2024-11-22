@@ -3,7 +3,7 @@ import { Children } from "react";
 
 interface Props {
     of: {
-        name: string;
+        name?: string;
         href?: string;
         auth?: boolean;
         icon?: React.ForwardRefExoticComponent<
@@ -11,6 +11,8 @@ interface Props {
         >;
         urlImage?: string;
         place?: string;
+        category?: string;
+        amount?: number;
     }[];
     render: (item: any, index: number) => JSX.Element;
 }
