@@ -4,11 +4,13 @@ import { Children } from "react";
 interface Props {
     of: {
         name: string;
-        href: string;
+        href?: string;
         auth?: boolean;
         icon?: React.ForwardRefExoticComponent<
             Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
         >;
+        urlImage?: string;
+        place?: string;
     }[];
     render: (item: any, index: number) => JSX.Element;
 }

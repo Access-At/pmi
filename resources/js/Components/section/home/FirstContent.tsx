@@ -1,4 +1,4 @@
-export default function FirstContent() {
+export default function FirstContentSection() {
     return (
         <section className="lg:container flex items-center justify-between mx-auto py-10 relative w-full">
             <div className="flex flex-col px-6 gap-3 py-52">

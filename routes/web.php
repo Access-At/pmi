@@ -50,4 +50,8 @@ Route::prefix('schedule')->group(function () {
     Route::delete('/{id}', [ScheduleController::class, 'deleteSchedule'])->name('schedule.delete');
 });
 
+Route::get('/jadwal-donor', function () {
+    return Inertia::render('JadwalDonor');
+});
+
 require __DIR__ . '/auth.php';

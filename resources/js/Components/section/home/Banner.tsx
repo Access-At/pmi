@@ -1,6 +1,6 @@
 import { Button } from "@/Components/ui/button";
 
-export default function Banner() {
+export default function BannerSection() {
     return (
         <section className="relative my-10 lg:container mx-auto">
             <div className="absolute top-10 lg:top-24 z-10">
