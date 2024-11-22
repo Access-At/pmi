@@ -25,7 +25,7 @@ class ScheduleSeeder extends Seeder
             $schedule = Schedule::create([
                 'title' => $title,
                 'slug' => Str::slug($title),
-                'location' => $faker->address,
+                'location' => $faker->city,
                 'description' => $faker->text('200'),
                 'image' => 'https://picsum.photos/200/300',
             ]);
