@@ -1,0 +1,28 @@
+meta {
+  name: update schedule
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{BASE_URL}}/schedule/event-baru-banyak/?_method=PUT
+  body: multipartForm
+  auth: none
+}
+
+query {
+  _method: PUT
+}
+
+body:multipart-form {
+  title: event baru banyak
+  location: Jakarta
+  description: update baru cuy
+  image: @file(/Users/rizsyadabiyandrariadi/Documents/2602783-1361926579.jpeg)
+  blood_stock[0][type]: A+
+  blood_stock[0][category]: AHF
+  blood_stock[0][amount]: 997
+  blood_stock[1][type]: A+
+  blood_stock[1][category]: FFP
+  blood_stock[1][amount]: 995
+}

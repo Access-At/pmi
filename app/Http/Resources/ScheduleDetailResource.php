@@ -51,7 +51,7 @@ class ScheduleDetailResource extends JsonResource
             'slug' => $this->slug,
             'description' => $this->description,
             'location' => $this->location,
-            'image' => $this->image,
+            'image' => asset("storage/schedules/" . $this->image),
             'details' => DetailStockResource::collection($this->details),
             'details_table' => $tableData,
             'totals' => [

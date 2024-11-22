@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EventRequest extends FormRequest
 {
@@ -24,6 +25,13 @@ class EventRequest extends FormRequest
         return [
             'title' => 'required|string',
             'description' => 'required|string',
+            'image' => [
+                Rule::requiredIf(function () {
+                    return $this->isMethod('post');
+                }),
+                'file',
+                'mimes:png,jpg,jpeg',
+            ],
             'date' => 'required|date',
             'location' => 'required|string',
             'start_time' => 'required|date_format:H:i:s',

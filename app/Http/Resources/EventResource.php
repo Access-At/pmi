@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class EventResource extends JsonResource
 {
@@ -27,6 +28,7 @@ class EventResource extends JsonResource
             'location' => $this->location,
             'lat' => $this->lat,
             'long' => $this->long,
+            'image' => asset("storage/events/" . $this->image),
         ];
     }
 }

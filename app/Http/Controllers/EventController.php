@@ -16,8 +16,15 @@ class EventController extends Controller
 
     public function getEventsById(string $slug)
     {
-        $event = EventService::getEventsBySlug($slug);
-        return response()->json($event);
+        try {
+            $event = EventService::getEventsBySlug($slug);
+            return response()->json($event);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Event not found',
+                'error' => $th->getMessage()
+            ], 404);
+        }
     }
 
     public function createEvent(EventRequest $request)

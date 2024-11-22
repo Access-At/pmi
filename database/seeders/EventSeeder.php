@@ -30,6 +30,7 @@ class EventSeeder extends Seeder
                 'location' => $faker->address,
                 'lat' => $faker->latitude,
                 'long' => $faker->longitude,
+                'image' => 'https://picsum.photos/200/300',
             ]);
         }
     }

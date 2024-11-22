@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
-use App\Http\Requests\ScheduleRequest;
 use App\Http\Resources\ScheduleDetailResource;
 use App\Http\Resources\ScheduleResource;
-use App\Models\StockDetail;
 use App\Repositories\ScheduleDetailRepository;
 use App\Repositories\ScheduleRepository;
 use App\Repositories\StockDetailRepository;
+use Illuminate\Support\Facades\Storage;
 
 class ScheduleService
 {
@@ -55,7 +54,7 @@ class ScheduleService
     private static function handleImageUpload($image): string
     {
         $imageName = uniqid() . '_' . time() . '.' . $image->extension();
-        $image->storeAs('public/schedules', $imageName);
+        Storage::disk('public')->putFileAs('schedules', $image, $imageName);
         return $imageName;
     }
 

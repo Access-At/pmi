@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Enums\BloodCategory;
 use App\Enums\BloodType;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ScheduleRequest extends FormRequest
 {
@@ -27,7 +28,13 @@ class ScheduleRequest extends FormRequest
             'title' => 'required|string',
             'location' => 'required|string',
             'description' => 'required|string',
-            'image' => 'required|file|mimes:jpg,jpeg,png',
+            'image' => [
+                Rule::requiredIf(function () {
+                    return $this->isMethod('post');
+                }),
+                'file',
+                'mimes:png,jpg,jpeg',
+            ],
             'blood_stock' => 'required|array',
             'blood_stock.*.type' => 'required|in:A+,A-,B+,B-,AB+,AB-,O+,O-,A+,A-,B+,B-,AB+,AB-,O+,O-',
             'blood_stock.*.category' => 'required|enum_key:' . BloodCategory::class,

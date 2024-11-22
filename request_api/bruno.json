@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "pmi",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

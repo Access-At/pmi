@@ -20,7 +20,6 @@ class DetailStockResource extends JsonResource
             'type' => $this->blood_type,
             'category' => $this->blood_category,
             'amount' => $this->amount,
-            // 'total' => $totalAmount,
         ];
     }
 }

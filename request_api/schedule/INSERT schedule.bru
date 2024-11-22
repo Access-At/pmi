@@ -1,0 +1,24 @@
+meta {
+  name: INSERT schedule
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BASE_URL}}/schedule
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  title: event baru banyak
+  location: Jakarta
+  description: dadadasdad
+  image: @file(/Users/rizsyadabiyandrariadi/Documents/2602783-1361926579.jpeg)
+  blood_stock[0][type]: A+
+  blood_stock[0][category]: AHF
+  blood_stock[0][amount]: 999
+  blood_stock[1][type]: A+
+  blood_stock[1][category]: FFP
+  blood_stock[1][amount]: 998
+}
