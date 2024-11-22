@@ -2,7 +2,7 @@ import Footer from "@/Components/Footer";
 import Navbar from "@/Components/Navbar";
 import { PropsWithChildren } from "react";
 
-export default function Guest({ children }: PropsWithChildren) {
+export default function GuestLayout({ children }: PropsWithChildren) {
     return (
         <div className="flex flex-col min-h-screen bg-background">
             <Navbar />

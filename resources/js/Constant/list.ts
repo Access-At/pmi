@@ -30,7 +30,7 @@ export const footerList = [
 
     {
         name: "Term & Condition",
-        href: "/term-and-condition",
+        href: "/terms-and-conditions",
     },
 
     {
