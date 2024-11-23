@@ -14,14 +14,14 @@ export default function TableStock() {
     const { bloodStoks } = usePage().props;
 
     const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
-    const bloodProducts = ["AHF", "FFP", "PCLR", "PC", "TC"];
+    const bloodCategory = ["AHF", "FFP", "PCLR", "PC", "TC"];
 
     const processData = () => {
         const processedData: Record<string, Record<string, number>> = {};
-        bloodProducts.forEach((product) => {
-            processedData[product] = {};
+        bloodCategory.forEach((category) => {
+            processedData[category] = {};
             bloodTypes.forEach((type) => {
-                processedData[product][type] = 0;
+                processedData[category][type] = 0;
             });
         });
 
@@ -83,14 +83,14 @@ export default function TableStock() {
                             </TableHeader>
                             <TableBody>
                                 <EachUtil
-                                    of={bloodProducts}
-                                    render={(product, productIndex) => (
+                                    of={bloodCategory}
+                                    render={(category, categoryIndex) => (
                                         <TableRow
-                                            key={product}
+                                            key={categoryIndex}
                                             className="odd:bg-red-50 even:bg-background font-bold"
                                         >
                                             <TableCell className="border-r border-gray-200">
-                                                {product}
+                                                {category}
                                             </TableCell>
                                             {bloodTypes.map((type, index) => (
                                                 <TableCell
@@ -102,14 +102,14 @@ export default function TableStock() {
                                                             : ""
                                                     }`}
                                                 >
-                                                    {data[product][type]}
+                                                    {data[category][type]}
                                                 </TableCell>
                                             ))}
                                             <TableCell className="text-center border-l border-gray-200">
                                                 {bloodTypes.reduce(
                                                     (sum, type) =>
                                                         sum +
-                                                        data[product][type],
+                                                        data[category][type],
                                                     0
                                                 )}
                                             </TableCell>
@@ -132,23 +132,23 @@ export default function TableStock() {
                                                         : ""
                                                 }`}
                                             >
-                                                {bloodProducts.reduce(
-                                                    (sum, product) =>
+                                                {bloodCategory.reduce(
+                                                    (sum, category) =>
                                                         sum +
-                                                        data[product][type],
+                                                        data[category][type],
                                                     0
                                                 )}
                                             </TableCell>
                                         )}
                                     />
                                     <TableCell className="text-center border-l border-gray-200">
-                                        {bloodProducts.reduce(
-                                            (sum, product) =>
+                                        {bloodCategory.reduce(
+                                            (sum, category) =>
                                                 sum +
                                                 bloodTypes.reduce(
                                                     (innerSum, type) =>
                                                         innerSum +
-                                                        data[product][type],
+                                                        data[category][type],
                                                     0
                                                 ),
                                             0
