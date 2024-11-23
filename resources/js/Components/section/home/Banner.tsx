@@ -23,7 +23,7 @@ export default function BannerSection() {
                 </div>
             </div>
             <img
-                src="assets/images/banner.png"
+                src="/assets/images/banner.png"
                 alt="Tangan dan Kantong Darah"
                 className="w-full relative top-[-12rem] md:top-[-18rem] lg:top-[-24rem]"
             />

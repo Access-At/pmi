@@ -16,7 +16,7 @@ export default function AuthLayout({ children, title }: Props) {
                 {children}
                 <section className="hidden lg:block flex-1">
                     <img
-                        src="assets/images/background.png"
+                        src="/assets/images/background.png"
                         alt="images"
                         className="w-full h-screen object-cover"
                     />

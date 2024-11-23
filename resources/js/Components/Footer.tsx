@@ -11,7 +11,7 @@ export default function Footer() {
                 <div className="flex flex-1 flex-col gap-1 text-center md:text-left mb-6 md:mb-0">
                     <div className="flex items-center justify-center md:justify-start gap-3">
                         <img
-                            src="assets/images/logo.png"
+                            src="/assets/images/logo.png"
                             alt="Bloodbags Logo"
                             width={50}
                             height={50}

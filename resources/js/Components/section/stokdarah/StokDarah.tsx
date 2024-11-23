@@ -1,36 +1,42 @@
 import EachUtil from "@/lib/EachUtil";
-import { StokDarahTotalsType } from "@/schemas/response-schema";
+import {
+    BloodStoksTotalByTypeResponseType,
+    BloodStoksTotalResponseType,
+} from "@/schemas/response-schema";
 import { usePage } from "@inertiajs/react";
 
 export default function StokDarahSection() {
-    const { stoks } = usePage().props;
-    // console.log(stoks.data.totals);
+    const { bloodStoks } = usePage().props;
+    console.log(bloodStoks.data);
     return (
         <section className="lg:container mx-auto my-10 px-6 space-y-5">
-            <h1 className="text-3xl font-bold">{stoks.data.title}</h1>
-            <div className="flex flex-wrap flex-grow md:flex-row items-center xl:justify-center justify-start gap-10 lg:gap-20 h-[18rem]">
-                {/* <EachUtil
-                    of={stoks.data.totals}
-                    render={(item: StokDarahTotalsType, index) => (
+            <h1 className="text-3xl font-bold">{bloodStoks.data.title}</h1>
+            <div className="flex flex-wrap flex-grow md:flex-row items-center xl:justify-center justify-start gap-10 xl:gap-20 xl:h-[18rem]">
+                <EachUtil
+                    of={bloodStoks.data.totals.by_blood_type}
+                    render={(
+                        item: BloodStoksTotalByTypeResponseType,
+                        index
+                    ) => (
                         <div
                             key={index}
-                            className="relative z-10 flex flex-col gap-5"
+                            className="xl:relative xl:z-10 flex flex-col gap-5"
                         >
                             <img
-                                src={`assets/images/blood/${item.total_by_blood_type}.png`}
+                                src={`/assets/images/blood/${item.type}.png`}
                                 alt=""
                                 className="w-20"
                             />
                             <p className="text-center text-primary font-bold text-5xl">
-                                {item.total_by_blood_type["A-min"]}
+                                {item.total}
                             </p>
                         </div>
                     )}
-                /> */}
+                />
                 <img
-                    src="assets/images/blood/vector.png"
+                    src="/assets/images/blood/vector.png"
                     alt=""
-                    className="relative top-[-12rem]"
+                    className="hidden xl:block xl:relative top-[-12rem]"
                 />
             </div>
         </section>

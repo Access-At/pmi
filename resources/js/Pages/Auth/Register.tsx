@@ -32,7 +32,7 @@ export default function Register() {
                     <Back />
                     <div className="flex flex-col items-center justify-center gap-6">
                         <img
-                            src="assets/images/logo.png"
+                            src="/assets/images/logo.png"
                             alt="logo"
                             width={150}
                             height={150}

@@ -12,7 +12,7 @@ export default function FirstContentSection() {
             </div>
             <div className="relative z-0 right-0">
                 <img
-                    src="assets/images/people.png"
+                    src="/assets/images/people.png"
                     alt="people"
                     className="w-[400px] xl:w-[800px]"
                 />

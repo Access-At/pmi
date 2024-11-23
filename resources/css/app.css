@@ -73,8 +73,4 @@
     body {
         @apply bg-background text-foreground;
     }
-
-    /* footer {
-        @apply bg-[url("assets/images/waves-footer.png")] bg-center bg-cover bg-no-repeat p-5;
-    } */
 }

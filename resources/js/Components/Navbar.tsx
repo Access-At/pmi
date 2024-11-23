@@ -18,7 +18,7 @@ export default function Navbar() {
             <div className="flex flex-row justify-between items-center p-4 md:p-6 lg:container mx-auto w-full">
                 <Link href="/" className="flex items-center gap-2">
                     <img
-                        src="assets/images/logo.png"
+                        src="/assets/images/logo.png"
                         alt="logo"
                         width={25}
                         height={25}

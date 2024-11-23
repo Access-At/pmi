@@ -30,9 +30,9 @@ class HomeController extends Controller
 
     public function stokDarah($slug)
     {
-        $stoks = ScheduleService::getSchedulesBySlug($slug);
+        $bloodStoks = ScheduleService::getSchedulesBySlug($slug);
         return Inertia::render('StokDarah', [
-            'stoks' => $stoks
+            'bloodStoks' => $bloodStoks
         ]);
     }
 
