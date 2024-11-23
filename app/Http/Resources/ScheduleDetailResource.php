@@ -27,24 +27,32 @@ class ScheduleDetailResource extends JsonResource
                     });
             });
 
-        // Totals by blood_type and blood_category
-        $byBloodTypeAndCategory = collect($details)->groupBy(['blood_type', 'blood_category'])->map(function ($categories) {
-            return $categories->map(function ($items) {
-                return $items->sum('amount');
-            });
-        });
 
-        // Totals by blood_category and blood_type
-        $byBloodCategoryAndType = collect($details)->groupBy(['blood_category', 'blood_type'])->map(function ($types) {
-            return $types->map(function ($items) {
-                return $items->sum('amount');
-            });
-        });
+        // // Totals by blood_type and blood_category
+        // $byBloodTypeAndCategory = collect($details)->groupBy(['blood_type', 'blood_category'])->map(function ($categories) {
+        //     return $categories->map(function ($items) {
+        //         return $items->sum('amount');
+        //     });
+        // });
 
-        // Totals for all blood types
+        // // Totals by blood_category and blood_type
+        // $byBloodCategoryAndType = collect($details)->groupBy(['blood_category', 'blood_type'])->map(function ($types) {
+        //     return $types->map(function ($items) {
+        //         return $items->sum('amount');
+        //     });
+        // });
+
+        // // Totals for all blood types
+        // $totalByBloodType = collect($details)->groupBy('blood_type')->map(function ($items) {
+        //     return $items->sum('amount');
+        // });
+
         $totalByBloodType = collect($details)->groupBy('blood_type')->map(function ($items) {
-            return $items->sum('amount');
-        });
+            return [
+                'type' => $items->first()->blood_type,
+                'total' => $items->sum('amount')
+            ];
+        })->values();
 
         return [
             'title' => $this->title,
@@ -52,13 +60,16 @@ class ScheduleDetailResource extends JsonResource
             'description' => $this->description,
             'location' => $this->location,
             'image' => asset("storage/schedules/" . $this->image),
-            'details' => DetailStockResource::collection($this->details),
-            'details_table' => $tableData,
+            'details' => DetailStockResource::collection($details),
+            // 'details_table' => $tableData,
             'totals' => [
-                'by_blood_type_and_category' => $byBloodTypeAndCategory,
-                'by_blood_category_and_type' => $byBloodCategoryAndType,
-                'total_by_blood_type' => $totalByBloodType,
+                'by_blood_type' => $totalByBloodType,
             ]
+            // 'totals' => [
+            //     'by_blood_type_and_category' => $byBloodTypeAndCategory,
+            //     'by_blood_category_and_type' => $byBloodCategoryAndType,
+            //     'total_by_blood_type' => $totalByBloodType,
+            // ]
         ];
     }
 }
