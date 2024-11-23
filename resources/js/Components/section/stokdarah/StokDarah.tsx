@@ -9,7 +9,9 @@ export default function StokDarahSection() {
     const { bloodStoks } = usePage().props;
     return (
         <section className="lg:container mx-auto my-10 px-6 space-y-5">
-            <h1 className="text-3xl font-bold">{bloodStoks.data.title}</h1>
+            <h1 className="text-2xl font-bold md:text-3xl">
+                {bloodStoks.data.title}
+            </h1>
             <div className="flex flex-wrap flex-grow md:flex-row items-center xl:justify-center justify-start gap-10 xl:gap-20 xl:h-[18rem]">
                 <EachUtil
                     of={bloodStoks.data.totals.by_blood_type}
@@ -24,9 +26,9 @@ export default function StokDarahSection() {
                             <img
                                 src={`/assets/images/blood/${item.type}.png`}
                                 alt=""
-                                className="w-[5rem]"
+                                className="w-[2.5rem] md:w-[5rem]"
                             />
-                            <p className="text-center text-primary font-bold text-5xl">
+                            <p className="text-center text-primary font-bold text-3xl md:text-5xl">
                                 {item.total}
                             </p>
                         </div>
