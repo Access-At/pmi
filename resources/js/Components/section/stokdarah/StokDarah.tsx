@@ -7,7 +7,6 @@ import { usePage } from "@inertiajs/react";
 
 export default function StokDarahSection() {
     const { bloodStoks } = usePage().props;
-    console.log(bloodStoks.data);
     return (
         <section className="lg:container mx-auto my-10 px-6 space-y-5">
             <h1 className="text-3xl font-bold">{bloodStoks.data.title}</h1>
@@ -25,7 +24,7 @@ export default function StokDarahSection() {
                             <img
                                 src={`/assets/images/blood/${item.type}.png`}
                                 alt=""
-                                className="w-20"
+                                className="w-[5rem]"
                             />
                             <p className="text-center text-primary font-bold text-5xl">
                                 {item.total}
