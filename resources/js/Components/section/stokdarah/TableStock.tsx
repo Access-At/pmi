@@ -34,7 +34,6 @@ export default function TableStock() {
     };
 
     const data = processData();
-    console.log(data);
 
     return (
         <section className="lg:container mx-auto my-10 px-6">
