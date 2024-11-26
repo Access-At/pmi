@@ -13,6 +13,16 @@ use Inertia\Response;
 
 class AuthenticatedSessionController extends Controller
 {
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboard');
+        }
+
+        return redirect()->route('home');
+    }
+
+
     /**
      * Display the login view.
      */
