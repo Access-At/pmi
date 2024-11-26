@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -31,10 +31,23 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
-        $request->validated();
+        // $request->validate();
+        $request->validate([
+            'email' => 'required|email|unique:' . User::class,
+            'username' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:255',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'terms' => 'required|boolean',
+        ]);
 
-        // dd(($request->validated());
-        $user = User::create($request->validated());
+        // $user = User::create($request->validate());
+        $user = User::create([
+            'email' => $request->email,
+            'username' => $request->username,
+            'phone_number' => $request->phone_number,
+            'password' => Hash::make($request->password),
+            'terms' => $request->terms,
+        ]);
 
         event(new Registered($user));
 

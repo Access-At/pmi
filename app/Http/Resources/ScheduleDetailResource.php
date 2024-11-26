@@ -19,17 +19,17 @@ class ScheduleDetailResource extends JsonResource
         // DONE
         $totalByBloodType = collect($details)->groupBy('blood_type')->map(function ($items) {
             return [
-                'type' => $items->first()->blood_type_format,
+                'type' => $items->first()->type_format,
                 'total' => $items->sum('amount')
             ];
         })->values();
 
 
-        $dataTable = collect($details)->groupBy(['blood_category', 'blood_type'])->map(function ($types) {
-            return $types->map(function ($items) {
-                return $items->sum('amount');
-            });
-        });
+        // $dataTable = collect($details)->groupBy(['blood_category', 'blood_type'])->map(function ($types) {
+        //     return $types->map(function ($items) {
+        //         return $items->sum('amount');
+        //     });
+        // });
 
         return [
             'title' => $this->title,
@@ -37,7 +37,7 @@ class ScheduleDetailResource extends JsonResource
             'description' => $this->description,
             'location' => $this->location,
             'image' => asset("storage/schedules/" . $this->image),
-            'details' => $dataTable,
+            'details' => DetailStockResource::collection($details),
             'totals' => [
                 'by_blood_type' => $totalByBloodType,
             ]

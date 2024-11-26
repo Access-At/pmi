@@ -18,7 +18,7 @@ class DetailStockResource extends JsonResource
 
         return [
             'type' => $this->blood_type,
-            'blood_type_format' => $this->blood_type_format, // Include this to ensure it’s appended
+            // 'blood_type_format' => $this->blood_type_format, // Include this to ensure it’s appended
             'category' => $this->blood_category,
             'amount' => $this->amount,
         ];

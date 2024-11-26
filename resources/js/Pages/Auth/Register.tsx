@@ -1,68 +1,29 @@
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/Components/ui/form";
+import { Link, useForm } from "@inertiajs/react";
 
 import AuthLayout from "@/Layouts/AuthLayout";
 import Back from "@/Components/Back";
 import { Button } from "@/Components/ui/button";
 import { Checkbox } from "@/Components/ui/checkbox";
 import { FormEventHandler } from "react";
-import { Inertia } from "@inertiajs/inertia";
 import { Input } from "@/Components/ui/input";
 import InputError from "@/Components/InputError";
 import { Label } from "@/Components/ui/label";
-import { Link } from "@inertiajs/react";
-import { router } from "@inertiajs/react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-const formSchema = z
-    .object({
-        email: z.string().email({
-            message: "Please enter a valid email address.",
-        }),
-        username: z.string().min(2, {
-            message: "Username must be at least 2 characters.",
-        }),
-        phone_number: z.string().min(10, {
-            message: "Phone number must be at least 10 characters.",
-        }),
-        password: z.string().min(8, {
-            message: "Password must be at least 8 characters.",
-        }),
-        password_confirmation: z.string().min(8, {
-            message: "Password must be at least 8 characters.",
-        }),
-    })
-    .refine((data) => data.password === data.password_confirmation, {
-        message: "Passwords don't match",
-        path: ["password_confirmation"], // path of error
-    });
 
 export default function Register() {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            username: "",
-            email: "",
-            phone_number: "",
-            password: "",
-        },
+    const { data, setData, post, processing, errors, reset } = useForm({
+        email: "",
+        username: "",
+        phone_number: "",
+        password: "",
+        password_confirmation: "",
+        terms: false,
     });
 
-    const submit = (value: z.infer<typeof formSchema>) => {
-        // post(route("register"), value, {
-        //     onSuccess: () => form.reset("password", "password_confirmation"),
-        // });
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
 
-        Inertia.post(route("register"), value, {
-            onSuccess: () => form.reset(),
+        post(route("register"), {
+            onFinish: () => reset("password", "password_confirmation"),
         });
     };
 
@@ -83,100 +44,7 @@ export default function Register() {
                             <span className="text-rose-400">bags</span>
                         </h1>
                     </div>
-                    <Form {...form}>
-                        <form
-                            onSubmit={form.handleSubmit(submit)}
-                            className="flex flex-col gap-4"
-                        >
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Email"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField
-                                control={form.control}
-                                name="username"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Username</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Username"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField
-                                control={form.control}
-                                name="phone_number"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>No Telepon</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Phone Number"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField
-                                control={form.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Password</FormLabel>
-                                        <FormControl>
-                                            <Input type="password" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField
-                                control={form.control}
-                                name="password_confirmation"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Confirm Password</FormLabel>
-                                        <FormControl>
-                                            <Input type="password" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <Button
-                                type="submit"
-                                className="w-full rounded-full"
-                            >
-                                Register
-                            </Button>
-                        </form>
-                    </Form>
-
-                    {/* <form onSubmit={submit} className="flex flex-col gap-4">
+                    <form onSubmit={submit} className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="email" className="font-bold">
                                 Email
@@ -302,14 +170,24 @@ export default function Register() {
                         </div>
 
                         <div className="flex items-center gap-2">
-                            <Checkbox name="terms" id="terms" />
+                            <Checkbox
+                                name="terms"
+                                id="terms"
+                                checked={data.terms}
+                                onCheckedChange={(checked) =>
+                                    setData("terms", checked as boolean)
+                                }
+                            />
                             <Label htmlFor="terms">Agree to join</Label>
                         </div>
 
-                        <Button className="w-full rounded-full">
+                        <Button
+                            className="w-full rounded-full"
+                            disabled={!data.terms || processing}
+                        >
                             Register
                         </Button>
-                    </form> */}
+                    </form>
                 </div>
                 <footer className="flex gap-2">
                     <p>Sudah punya akun ?</p>

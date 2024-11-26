@@ -1,14 +1,13 @@
+import NavLink from "@/Components/NavLink";
 import { Link, usePage } from "@inertiajs/react";
 import { PropsWithChildren, ReactNode, useState } from "react";
 
-import NavLink from "@/Components/NavLink";
-import Navbar from "@/Components/Navbar";
-
-export default function AuthenticatedLayout({
+export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
     const { auth } = usePage().props;
+    // const user = usePage().props.auth.user;
     console.log(auth);
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -16,8 +15,6 @@ export default function AuthenticatedLayout({
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <Navbar />
-
             {header && (
                 <header className="bg-white shadow">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
