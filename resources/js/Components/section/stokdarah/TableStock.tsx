@@ -16,24 +16,24 @@ export default function TableStock() {
     const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
     const bloodCategory = ["AHF", "FFP", "PCLR", "PC", "TC"];
 
-    const processData = () => {
-        const processedData: Record<string, Record<string, number>> = {};
-        bloodCategory.forEach((category) => {
-            processedData[category] = {};
-            bloodTypes.forEach((type) => {
-                processedData[category][type] = 0;
-            });
-        });
-
-        bloodStoks.data.details.forEach((detail) => {
-            const type = detail.type.replace("-plus", "+").replace("-min", "-");
-            processedData[detail.category][type] = detail.amount;
-        });
-
-        return processedData;
+    const calculateTotal = (data: Record<string, number>): number => {
+        return Object.values(data).reduce((sum, value) => sum + value, 0);
+    };
+    const calculateColumnTotal = (bloodType: string): number => {
+        return bloodCategory.reduce(
+            (sum, category) =>
+                sum + (bloodStoks.data.details[category]?.[bloodType] || 0),
+            0
+        );
     };
 
-    const data = processData();
+    const calculateGrandTotal = (): number => {
+        return bloodCategory.reduce(
+            (sum, category) =>
+                sum + calculateTotal(bloodStoks.data.details[category] || {}),
+            0
+        );
+    };
 
     return (
         <section className="lg:container mx-auto my-10 px-6">
@@ -92,25 +92,31 @@ export default function TableStock() {
                                             <TableCell className="border-r border-gray-200">
                                                 {category}
                                             </TableCell>
-                                            {bloodTypes.map((type, index) => (
-                                                <TableCell
-                                                    key={type}
-                                                    className={`text-center ${
-                                                        index <
-                                                        bloodTypes.length - 1
-                                                            ? "border-r border-gray-200"
-                                                            : ""
-                                                    }`}
-                                                >
-                                                    {data[category][type]}
-                                                </TableCell>
-                                            ))}
+                                            <EachUtil
+                                                of={bloodTypes}
+                                                render={(type, index) => (
+                                                    <TableCell
+                                                        key={type}
+                                                        className={`text-center ${
+                                                            index <
+                                                            bloodTypes.length -
+                                                                1
+                                                                ? "border-r border-gray-200"
+                                                                : ""
+                                                        }`}
+                                                    >
+                                                        {bloodStoks.data
+                                                            .details[category][
+                                                            type
+                                                        ] || 0}
+                                                    </TableCell>
+                                                )}
+                                            />
                                             <TableCell className="text-center border-l border-gray-200">
-                                                {bloodTypes.reduce(
-                                                    (sum, type) =>
-                                                        sum +
-                                                        data[category][type],
-                                                    0
+                                                {calculateTotal(
+                                                    bloodStoks.data.details[
+                                                        category
+                                                    ] || {}
                                                 )}
                                             </TableCell>
                                         </TableRow>
@@ -132,27 +138,12 @@ export default function TableStock() {
                                                         : ""
                                                 }`}
                                             >
-                                                {bloodCategory.reduce(
-                                                    (sum, category) =>
-                                                        sum +
-                                                        data[category][type],
-                                                    0
-                                                )}
+                                                {calculateColumnTotal(type)}
                                             </TableCell>
                                         )}
                                     />
                                     <TableCell className="text-center border-l border-gray-200">
-                                        {bloodCategory.reduce(
-                                            (sum, category) =>
-                                                sum +
-                                                bloodTypes.reduce(
-                                                    (innerSum, type) =>
-                                                        innerSum +
-                                                        data[category][type],
-                                                    0
-                                                ),
-                                            0
-                                        )}
+                                        {calculateGrandTotal()}
                                     </TableCell>
                                 </TableRow>
                             </TableBody>

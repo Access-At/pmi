@@ -13,12 +13,12 @@ class StockDetail extends Model
 
     protected $casts = [
         'blood_type' => 'string',
-        // 'blood_type_format' => 'string',
+        'blood_type_format' => 'string',
     ];
 
     protected function getBloodTypeFormatAttribute($value)
     {
-        return str_replace(['-', '+'], ['-min', '-plus'], $value);
-        // return str_replace(['-', '+'], ['-min', '-plus'], $this->blood_type);
+        // return str_replace(['-', '+'], ['-min', '-plus'], $value);
+        return str_replace(['-', '+'], ['-min', '-plus'], $this->blood_type);
     }
 }

@@ -45,7 +45,7 @@ export interface BloodStoks {
         description: string;
         location: string;
         image: string;
-        details: Detail[];
+        details: Detail;
         totals: Totals;
     };
 }
@@ -59,10 +59,10 @@ export interface ByBloodType {
     total: number;
 }
 
-interface Detail {
-    type: string;
-    category: string;
-    amount: number;
+export interface Details {
+    [category: string]: {
+        [bloodType: string]: number;
+    };
 }
 
 export type PageProps<
