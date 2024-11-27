@@ -8,13 +8,23 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+
 Route::prefix('/')->group(function () {
     Route::get('', [HomeController::class, "index"])->name("home");
-    Route::get('terms-and-conditions', [HomeController::class, "termsAndConditions"])->name("terms-and-conditions");
-    Route::get('privacy-policy', [HomeController::class, "privacyPolicy"])->name("privacy-policy");
-    Route::get('jadwal-donor', [HomeController::class, "jadwalDonor"])->name("jadwal-donor");
-    Route::get('stok-darah', [HomeController::class, "stokDarah"])->name("stok-darah");
-    Route::get('stok-darah/{slug}', [HomeController::class, "stokDarah"])->name("stok-darah");
+    Route::get('terms-and-conditions', [HomeController::class, "termsAndConditions"])->name("terms");
+    Route::get('privacy-policy', [HomeController::class, "privacyPolicy"])->name("privacy");
+    Route::get('jadwal-donor', [HomeController::class, "jadwalDonor"])->name("jadwal");
+    Route::get('notifikasi', [HomeController::class, "jadwalDonor"])->name("notifikasi");
+    // Route::get('stok-darah', [HomeController::class, "stokDarah"])->name("stok");
+    Route::get('stok-darah/{slug}', [HomeController::class, "stokDarah"])->name("stok");
 });
 
 Route::get('/dashboard', function () {
@@ -42,7 +52,5 @@ Route::prefix('schedule')->group(function () {
     Route::put('/{id}', [ScheduleController::class, 'updateSchedule'])->name('schedule.update');
     Route::delete('/{id}', [ScheduleController::class, 'deleteSchedule'])->name('schedule.delete');
 });
-
-
 
 require __DIR__ . '/auth.php';

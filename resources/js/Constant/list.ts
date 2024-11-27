@@ -1,52 +1,60 @@
 export const navList = [
     {
         name: "Home",
-        href: "/",
+        route: "home",
+        // href: "/",
     },
     {
         name: "Jadwal Donor",
-        href: "/jadwal-donor",
+        route: "jadwal",
+        // href: "/jadwal-donor",
     },
+    // {
+    //     name: "Stok Darah",
+    //     route: "stok",
+    //     href: "/stok-darah",
+    // },
     {
-        name: "Stok Darah",
-        href: "/stok-darah",
+        name: "Notifikasi",
+        route: "notifikasi",
+        // href: "/notifikasi",
     },
-    {
-        name: "notifikasi",
-        href: "/notifikasi",
-        auth: true,
-    },
-    {
-        name: "Tentang Kami",
-        href: "/tentang-kami",
-    },
+    // {
+    //     name: "Tentang Kami",
+    //     route: "about",
+    //     href: "/tentang-kami",
+    // },
 ];
 
 export const footerList = [
     {
         name: "Home",
-        href: "/",
+        route: "home",
+        // href: "/",
     },
-
     {
         name: "Term & Condition",
-        href: "/terms-and-conditions",
+        route: "terms",
+        // href: "/terms-and-conditions",
     },
-
     {
         name: "Jadwal Donor",
-        href: "/jadwal-donor",
+        route: "jadwal",
+        // href: "/jadwal-donor",
     },
-    {
-        name: "Contact Us",
-        href: "/contact-us",
-    },
+    // {
+    //     name: "Contact Us",
+    //     route: "contact",
+    //     href: "/contact-us",
+    // },
     {
         name: "Privacy Policy",
-        href: "/privacy-policy",
+        route: "privacy",
+        // href: "/privacy-policy",
     },
-    {
-        name: "Stok Darah",
-        href: "/stok-darah",
-    },
+    // {
+    //     name: "Stok Darah",
+    //     route: "stok",
+    //     href: "/stok-darah",
+    // },
 ];
