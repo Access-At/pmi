@@ -8,7 +8,7 @@ import { CalendarDaysIcon } from "lucide-react";
 export default function EventSection() {
     const { events } = usePage().props;
     return (
-        <section className="lg:container mx-auto px-4 md:px-6 lg:px-8 space-y-4 my-10">
+        <section className="px-4 md:px-6 lg:px-8 space-y-4 my-10">
             <h1 className="text-2xl md:text-3xl font-bold">Event</h1>
             <EachUtil
                 of={events.data}

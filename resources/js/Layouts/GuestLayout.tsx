@@ -6,7 +6,7 @@ export default function GuestLayout({ children }: PropsWithChildren) {
     return (
         <div className="flex flex-col min-h-screen bg-background">
             <Navbar />
-            <main className="flex-grow">{children}</main>
+            <main>{children}</main>
 
             <img
                 src="/assets/images/waves-footer.png"

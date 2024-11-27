@@ -7,15 +7,13 @@ import { socialMedia } from "@/Constant/social-media";
 export default function Footer() {
     return (
         <footer className="bg-gradient-to-t from-primary to-secondary">
-            <div className="lg:container flex px-6 py-10 text-white gap-10 lg:flex-row flex-col md:items-start items-center mx-auto">
+            <div className=" flex px-6 py-10 text-white gap-10 lg:flex-row flex-col md:items-start items-center mx-auto">
                 <div className="flex flex-1 flex-col gap-1 text-center md:text-left mb-6 md:mb-0">
                     <div className="flex items-center justify-center md:justify-start gap-3">
                         <img
                             src="/assets/images/logo.png"
                             alt="Bloodbags Logo"
-                            width={50}
-                            height={50}
-                            className="md:order-1"
+                            className="md:order-1 w-[3.125rem] h-[3.125rem]"
                         />
                         <h2 className="text-2xl font-bold uppercase md:order-2">
                             BloodBags
@@ -30,7 +28,9 @@ export default function Footer() {
                             ...footerList.slice(4),
                         ].map((item, index) => (
                             <li key={index} className="col-span-1">
-                                <Link href={item.href}>| {item.name}</Link>
+                                <Link href={route(item.route)}>
+                                    | {item.name}
+                                </Link>
                             </li>
                         ))}
                     </ul>

@@ -1,4 +1,4 @@
-import StokDarahSection from "@/Components/section/stokdarah/StokDarah";
+import StokDarahSection from "@/Components/section/stokdarah/DetailStokDarah";
 import TableStock from "@/Components/section/stokdarah/TableStock";
 import GuestLayout from "@/Layouts/GuestLayout";
 

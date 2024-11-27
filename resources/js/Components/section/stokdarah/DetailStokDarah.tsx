@@ -10,7 +10,7 @@ export default function StokDarahSection() {
     const { bloodStoks } = props;
     console.log(props);
     return (
-        <section className="lg:container mx-auto my-10 px-6 space-y-5">
+        <section className="my-10 px-6 space-y-5">
             <h1 className="text-2xl font-bold md:text-3xl">
                 {bloodStoks.data.title}
             </h1>

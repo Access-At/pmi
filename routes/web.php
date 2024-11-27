@@ -23,7 +23,7 @@ Route::prefix('/')->group(function () {
     Route::get('privacy-policy', [HomeController::class, "privacyPolicy"])->name("privacy");
     Route::get('jadwal-donor', [HomeController::class, "jadwalDonor"])->name("jadwal");
     Route::get('notifikasi', [HomeController::class, "jadwalDonor"])->name("notifikasi");
-    // Route::get('stok-darah', [HomeController::class, "stokDarah"])->name("stok");
+    Route::get('stok-darah', [HomeController::class, "daftarPMI"])->name("pmi");
     Route::get('stok-darah/{slug}', [HomeController::class, "stokDarah"])->name("stok");
 });
 

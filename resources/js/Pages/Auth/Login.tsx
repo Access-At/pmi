@@ -5,8 +5,8 @@ import { FormEventHandler } from "react";
 import InputError from "@/Components/InputError";
 import AuthLayout from "@/Layouts/AuthLayout";
 import Back from "@/Components/Back";
-import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function Login({
     status,

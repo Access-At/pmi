@@ -28,6 +28,22 @@ class HomeController extends Controller
         ]);
     }
 
+    public function event()
+    {
+        // bikinin event detail yang ada di figma yang ada map nya itu
+        return Inertia::render("Event", []);
+    }
+
+    public function daftarPMI()
+    {
+
+        $schedules = ScheduleService::getSchedules();
+
+        return Inertia::render('DaftarPMI', [
+            'schedules' => $schedules,
+        ]);
+    }
+
     public function stokDarah($slug)
     {
         $bloodStoks = ScheduleService::getSchedulesBySlug($slug);

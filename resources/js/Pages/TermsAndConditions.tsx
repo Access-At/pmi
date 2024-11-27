@@ -3,7 +3,7 @@ import GuestLayout from "@/Layouts/GuestLayout";
 export default function TermsAndConditions() {
     return (
         <GuestLayout>
-            <section className="lg:container mx-auto my-10 space-y-8">
+            <section className="my-10 space-y-8">
                 <h1 className="text-3xl text-center font-bold">
                     Terms and Conditions
                 </h1>

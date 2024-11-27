@@ -13,7 +13,7 @@ import { Link, usePage } from "@inertiajs/react";
 export default function JadwalDonorSection() {
     const { schedules } = usePage().props;
     return (
-        <div className="lg:container mx-auto px-6 flex flex-col gap-4 h-fit">
+        <section className="px-6 flex flex-col gap-4 h-fit">
             <h1 className="text-4xl font-bold mb-8">Jadwal Donor Darah</h1>
             <Carousel
                 opts={{
@@ -30,7 +30,7 @@ export default function JadwalDonorSection() {
                                 className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
                                 key={index}
                             >
-                                <Link href={`/stok-darah/${item.slug}`}>
+                                <Link href={``}>
                                     <div className="relative transform transition-transform hover:scale-105">
                                         <Card className="relative overflow-hidden group">
                                             <div className="absolute inset-0 bg-red-600 transform rotate-3 scale-105 -z-10" />
@@ -62,6 +62,6 @@ export default function JadwalDonorSection() {
                 <CarouselPrevious className="hidden lg:block" />
                 <CarouselNext className="hidden lg:block" />
             </Carousel>
-        </div>
+        </section>
     );
 }
