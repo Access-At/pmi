@@ -15,9 +15,9 @@ use BenSampo\Enum\Enum;
  */
 final class BloodCategory extends Enum
 {
-    const AHF = 'Anti Hemophilic Factor (AHF)';
-    const FFP = 'Fresh Frozen Plasma (FFP)';
-    const PCLR = 'Packed Red Cell Leuko Reduce (PCLR)';
-    const PC = 'Packed Red Cell (PC)';
-    const TC = 'Thrombocyte Concentrate (TC)';
+  const AHF = 'Anti Hemophilic Factor (AHF)';
+  const FFP = 'Fresh Frozen Plasma (FFP)';
+  const PCLR = 'Packed Red Cell Leuko Reduce (PCLR)';
+  const PC = 'Packed Red Cell (PC)';
+  const TC = 'Thrombocyte Concentrate (TC)';
 }

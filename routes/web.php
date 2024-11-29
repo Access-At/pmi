@@ -22,7 +22,7 @@ Route::prefix('/')->group(function () {
   Route::get('terms-and-conditions', [HomeController::class, "termsAndConditions"])->name("terms");
   Route::get('privacy-policy', [HomeController::class, "privacyPolicy"])->name("privacy");
   Route::get('jadwal-donor', [HomeController::class, "jadwalDonor"])->name("jadwal");
-  Route::get("event/{slug}", [HomeController::class, "event"])->name("event");
+  Route::get("event/{slug}", [HomeController::class, "event"])->name("event.detail");
   Route::get('stok-darah', [HomeController::class, "daftarPMI"])->name("pmi");
   Route::get('stok-darah/{slug}', [HomeController::class, "stokDarah"])->name("stok");
 });
@@ -32,10 +32,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-  Route::get('/profile/{id}', [ProfileController::class, 'show'])->name("profile");
-  Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-  Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+  Route::get('/profile', [ProfileController::class, 'show'])->name("profile.show");
+  Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+  Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+  // Route::get("/password/{id}", [PasswordController::class, 'edit'])->name('password.edit');
+  // Route::patch("/password", [PasswordController::class, 'update'])->name('password.update');
 });
 
 Route::prefix('events')->group(function () {

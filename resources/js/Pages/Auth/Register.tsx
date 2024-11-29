@@ -56,7 +56,7 @@ export default function Register() {
                                 type="email"
                                 name="email"
                                 value={data.email}
-                                autoComplete="username"
+                                autoComplete="email"
                                 onChange={(e) =>
                                     setData("email", e.target.value)
                                 }

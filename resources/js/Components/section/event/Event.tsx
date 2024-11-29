@@ -2,7 +2,7 @@ import { Button } from "@/Components/ui/button";
 import { Card, CardContent } from "@/Components/ui/card";
 import EachUtil from "@/lib/EachUtil";
 import { EventResponseType } from "@/schemas/response-schema";
-import { usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { CalendarDaysIcon } from "lucide-react";
 
 export default function EventSection() {
@@ -13,39 +13,45 @@ export default function EventSection() {
             <EachUtil
                 of={events.data}
                 render={(item: EventResponseType, index) => (
-                    <Card className="w-full">
-                        <CardContent className="p-4">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                                {/* Icon Section */}
-                                <div className="flex-shrink-0 w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                                    <CalendarDaysIcon className="w-6 h-6 text-red-600" />
-                                </div>
+                    <Link
+                        key={index}
+                        href={route("event.detail", item.slug)}
+                        className="flex flex-col gap-2"
+                    >
+                        <Card className="w-full">
+                            <CardContent className="p-4">
+                                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                                    {/* Icon Section */}
+                                    <div className="flex-shrink-0 w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                                        <CalendarDaysIcon className="w-6 h-6 text-red-600" />
+                                    </div>
 
-                                {/* Content Section */}
-                                <div className="flex-grow space-y-1">
-                                    <h3 className="text-lg font-semibold">
-                                        {item.title}
-                                    </h3>
-                                    <p className="text-sm text-muted-foreground">
-                                        {item.date}
-                                    </p>
-                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground">
-                                        <span>{item.time}</span>
-                                        <span className="hidden sm:inline">
-                                            •
-                                        </span>
-                                        <span>{item.location}</span>
+                                    {/* Content Section */}
+                                    <div className="flex-grow space-y-1">
+                                        <h3 className="text-lg font-semibold">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-sm text-muted-foreground">
+                                            {item.date}
+                                        </p>
+                                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground">
+                                            <span>{item.time}</span>
+                                            <span className="hidden sm:inline">
+                                                •
+                                            </span>
+                                            <span>{item.location}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="w-full sm:w-auto mt-4 sm:mt-0">
+                                        <Button className="w-full sm:w-auto bg-gray-400 rounded-full">
+                                            Ingkatkan Saya
+                                        </Button>
                                     </div>
                                 </div>
-
-                                <div className="w-full sm:w-auto mt-4 sm:mt-0">
-                                    <Button className="w-full sm:w-auto bg-gray-400 rounded-full">
-                                        Ingkatkan Saya
-                                    </Button>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
+                            </CardContent>
+                        </Card>
+                    </Link>
                 )}
             />
         </section>

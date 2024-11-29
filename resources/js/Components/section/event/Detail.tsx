@@ -16,8 +16,12 @@ export default function Detail() {
         <section className="flex flex-col md:flex-row px-6 w-full gap-5 my-4">
             <div className="flex flex-col gap-5">
                 <div className="flex flex-col gap-1">
-                    <p className="text-primary font-bold">Event Donor Darah</p>
-                    <h1 className="text-2xl font-bold">{event.data.title}</h1>
+                    <p className="text-primary font-bold md:text-lg">
+                        Event Donor Darah
+                    </p>
+                    <h1 className="text-2xl font-bold md:text-3xl">
+                        {event.data.title}
+                    </h1>
                 </div>
                 <Card className="overflow-hidden flex flex-col gap-4">
                     <CardHeader className="w-full p-0">
@@ -57,7 +61,7 @@ export default function Detail() {
                 </Card>
             </div>
             {/* Map */}
-            <div className="h-[840px] rounded-lg overflow-hidden shadow-sm w-full">
+            <div className="h-[820px] rounded-lg overflow-hidden shadow-sm w-full">
                 <MapContainer
                     center={[event.data.lat, event.data.long]}
                     zoom={16}

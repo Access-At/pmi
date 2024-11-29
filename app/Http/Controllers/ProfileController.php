@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
+use App\Services\ProfileService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,19 +18,20 @@ class ProfileController extends Controller
   /**
    * Display the user's profile form.
    */
-  public function show($id)
+  public function show()
   {
-    $user = User::find($id);
-    return Inertia::render('Profile', [
-      'user' => $user
+    return Inertia::render('Profile/Show', [
+      'user' => Auth::user()
     ]);
   }
-  public function edit(Request $request): Response
+  public function edit()
   {
-    return Inertia::render('Profile/Edit', [
-      'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-      'status' => session('status'),
-    ]);
+    return Inertia::render(
+      'Profile/Edit',
+      [
+        'user' => Auth::user()
+      ]
+    );
   }
 
   /**
@@ -37,15 +39,28 @@ class ProfileController extends Controller
    */
   public function update(ProfileUpdateRequest $request): RedirectResponse
   {
-    $request->user()->fill($request->validated());
+    $user = Auth::user();
 
-    if ($request->user()->isDirty('email')) {
-      $request->user()->email_verified_at = null;
+    if ($user instanceof User) {
+      $user->username = $request->username;
+      $user->registration_number = $request->registration_number;
+      $user->phone_number = $request->phone_number;
+      $user->gender = $request->gender;
+      $user->domisili = $request->domisili;
+      $user->type = $request->type;
+      $user->rhesus = $request->rhesus;
+
+      if ($request->hasFile('image_path')) {
+        $imagePath = $request->file('image_path')->store('profile_images', 'public');
+        $user->image_path = $imagePath;
+      }
+
+      $user->update();
+    } else {
+      return response()->json(['error' => 'User not found'], 404);
     }
 
-    $request->user()->save();
-
-    return Redirect::route('profile.edit');
+    return Redirect::route('profile.edit')->with('success', 'Profile updated successfully');
   }
 
   /**

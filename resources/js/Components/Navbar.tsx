@@ -110,12 +110,22 @@ export default function Navbar() {
                                 align="end"
                             >
                                 <DropdownMenuItem asChild>
-                                    <Link href={route("profile", user.id)}>
+                                    <Link
+                                        href={route(
+                                            "profile.show",
+                                            user.username
+                                        )}
+                                    >
                                         Profile
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild>
-                                    <Link href={route("logout")} method="post">
+                                    <Link
+                                        href={route("logout")}
+                                        method="post"
+                                        as="button"
+                                        className="w-full text-left"
+                                    >
                                         Logout
                                     </Link>
                                 </DropdownMenuItem>

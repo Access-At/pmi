@@ -1,14 +1,14 @@
 export interface User {
-    // id: number;
-    // name: string;
-    // email: string;
-    // email_verified_at?: string;
     id: number;
     username: string;
     email: string;
-    email_verified_at: string;
     phone_number: string;
-    terms: boolean;
+    type: string;
+    domisili: string;
+    gender: string;
+    registration_number: string;
+    rhesus: string;
+    image_path: string;
 }
 
 export interface Events {
@@ -75,6 +75,9 @@ export type PageProps<
 > = T & {
     auth: {
         user: User;
+    };
+    flash: {
+        success: string;
     };
     user: User;
     events: Events;
