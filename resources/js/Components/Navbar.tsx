@@ -13,6 +13,7 @@ import {
 import { Avatar } from "./ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import NavLink from "./NavLink";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 
 export default function Navbar() {
     const user = usePage().props.auth.user;
@@ -42,16 +43,41 @@ export default function Navbar() {
                                     key={index}
                                     active={route().current(item.route)}
                                     href={route(item.route)}
-                                    className={cn(
-                                        item.name === "Notifikasi" && !user
-                                            ? "hidden"
-                                            : ""
-                                    )}
                                 >
                                     {item.name}
                                 </NavLink>
                             )}
                         />
+                        {user ? (
+                            <Dialog>
+                                <DialogTrigger className="hover:text-primary hover:underline hover:underline-offset-4">
+                                    Notifikasi
+                                </DialogTrigger>
+                                <DialogContent>
+                                    <h1 className="text-xl font-bold">
+                                        Notifikasi
+                                    </h1>
+                                    <div className="flex flex-col items-center justify-center gap-4">
+                                        <img
+                                            src="/assets/images/Notifikasi.png"
+                                            alt="notifikasi"
+                                        />
+                                        <div className="flex flex-col items-center justify-center text-center text-muted-foreground">
+                                            <h2 className="text-xl font-bold text-black">
+                                                Belum ada Notifikasi
+                                            </h2>
+                                            <p>
+                                                Tidak ada notifikasi saat ini.
+                                            </p>
+                                            <p>
+                                                Notifikasi baru akan muncul di
+                                                halaman ini
+                                            </p>
+                                        </div>
+                                    </div>
+                                </DialogContent>
+                            </Dialog>
+                        ) : null}
                     </div>
 
                     {!user ? (
@@ -84,8 +110,8 @@ export default function Navbar() {
                                 align="end"
                             >
                                 <DropdownMenuItem asChild>
-                                    <Link href={route("profile.edit")}>
-                                        Profile Edit
+                                    <Link href={route("profile", user.id)}>
+                                        Profile
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild>
@@ -115,16 +141,43 @@ export default function Navbar() {
                                         key={index}
                                         href={route(item.route)}
                                         mobile={true}
-                                        className={cn(
-                                            item.name === "Notifikasi" && !user
-                                                ? "hidden"
-                                                : ""
-                                        )}
                                     >
                                         {item.name ? item.name : ""}
                                     </NavLink>
                                 )}
                             />
+
+                            {user ? (
+                                <Dialog>
+                                    <DialogTrigger className="relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-gray-100 w-full">
+                                        Notifikasi
+                                    </DialogTrigger>
+                                    <DialogContent>
+                                        <h1 className="text-xl font-bold">
+                                            Notifikasi
+                                        </h1>
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <img
+                                                src="/assets/images/Notifikasi.png"
+                                                alt="notifikasi"
+                                            />
+                                            <div className="flex flex-col items-center justify-center text-center text-muted-foreground">
+                                                <h2 className="text-xl font-bold text-black">
+                                                    Belum ada Notifikasi
+                                                </h2>
+                                                <p>
+                                                    Tidak ada notifikasi saat
+                                                    ini.
+                                                </p>
+                                                <p>
+                                                    Notifikasi baru akan muncul
+                                                    di halaman ini
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </DialogContent>
+                                </Dialog>
+                            ) : null}
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>

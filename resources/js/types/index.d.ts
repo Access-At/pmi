@@ -76,6 +76,7 @@ export type PageProps<
     auth: {
         user: User;
     };
+    user: User;
     events: Events;
     event: EventDetail;
     schedules: Schedules;

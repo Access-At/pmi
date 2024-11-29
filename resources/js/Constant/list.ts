@@ -11,10 +11,6 @@ export const navList = [
         name: "Stok Darah",
         route: "pmi",
     },
-    {
-        name: "Notifikasi",
-        route: "notifikasi",
-    },
     // {
     //     name: "Tentang Kami",
     //     route: "about",
