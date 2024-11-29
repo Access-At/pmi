@@ -20,7 +20,7 @@ export default function Navbar() {
     return (
         <nav className="sticky top-0 z-50 bg-background">
             <div className="flex flex-row justify-between items-center p-4 md:p-6 w-full">
-                <Link href="/" className="flex items-center gap-2">
+                <Link href={route("home")} className="flex items-center gap-2">
                     <img
                         src="/assets/images/logo.png"
                         alt="logo"
@@ -42,6 +42,11 @@ export default function Navbar() {
                                     key={index}
                                     active={route().current(item.route)}
                                     href={route(item.route)}
+                                    className={cn(
+                                        item.name === "Notifikasi" && !user
+                                            ? "hidden"
+                                            : ""
+                                    )}
                                 >
                                     {item.name}
                                 </NavLink>
@@ -51,7 +56,7 @@ export default function Navbar() {
 
                     {!user ? (
                         <Link
-                            href="/login"
+                            href={route("login")}
                             className={cn(
                                 buttonVariants(),
                                 "bg-red-700 rounded-full px-8"

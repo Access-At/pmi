@@ -9,56 +9,59 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        return Inertia::render('Home', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-        ]);
-    }
+  public function index()
+  {
+    return Inertia::render('Home', [
+      'canLogin' => Route::has('login'),
+      'canRegister' => Route::has('register'),
+    ]);
+  }
 
-    public function jadwalDonor()
-    {
-        $events = EventService::getEvents();
-        $schedules = ScheduleService::getSchedules();
+  public function jadwalDonor()
+  {
+    $events = EventService::getEvents();
+    $schedules = ScheduleService::getSchedules();
 
-        return Inertia::render('JadwalDonor', [
-            'events' => $events,
-            'schedules' => $schedules,
-        ]);
-    }
+    return Inertia::render('JadwalDonor', [
+      'events' => $events,
+      'schedules' => $schedules,
+    ]);
+  }
 
-    public function event()
-    {
-        // bikinin event detail yang ada di figma yang ada map nya itu
-        return Inertia::render("Event", []);
-    }
+  public function event($slug)
+  {
+    $event = EventService::getEventsBySlug($slug);
 
-    public function daftarPMI()
-    {
+    return Inertia::render('EventDetail', [
+      "event" => $event
+    ]);
+  }
 
-        $schedules = ScheduleService::getSchedules();
+  public function daftarPMI()
+  {
 
-        return Inertia::render('DaftarPMI', [
-            'schedules' => $schedules,
-        ]);
-    }
+    $schedules = ScheduleService::getSchedules();
 
-    public function stokDarah($slug)
-    {
-        $bloodStoks = ScheduleService::getSchedulesBySlug($slug);
-        return Inertia::render('StokDarah', [
-            'bloodStoks' => $bloodStoks
-        ]);
-    }
+    return Inertia::render('DaftarPMI', [
+      'schedules' => $schedules,
+    ]);
+  }
 
-    public function termsAndConditions()
-    {
-        return Inertia::render('TermsAndConditions');
-    }
+  public function stokDarah($slug)
+  {
+    $bloodStoks = ScheduleService::getSchedulesBySlug($slug);
+    return Inertia::render('StokDarah', [
+      'bloodStoks' => $bloodStoks
+    ]);
+  }
 
-    public function privacyPolicy()
-    {
-        return Inertia::render('PrivacyPolicy');
-    }
+  public function termsAndConditions()
+  {
+    return Inertia::render('TermsAndConditions');
+  }
+
+  public function privacyPolicy()
+  {
+    return Inertia::render('PrivacyPolicy');
+  }
 }

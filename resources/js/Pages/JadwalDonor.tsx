@@ -1,4 +1,4 @@
-import EventSection from "@/Components/section/jadwal-donor/Event";
+import EventSection from "@/Components/section/event/Event";
 import JadwalDonorSection from "@/Components/section/jadwal-donor/JadwalDonor";
 import GuestLayout from "@/Layouts/GuestLayout";
 

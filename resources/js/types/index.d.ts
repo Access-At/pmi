@@ -15,15 +15,20 @@ export interface Events {
     data: EventData[];
 }
 
+export interface EventDetail {
+    data: EventData;
+}
+
 export interface EventData {
     title: string;
     slug: string;
     description: string;
     date: string;
+    image: string;
     time: string;
     location: string;
-    lat: string;
-    long: string;
+    lat: number;
+    long: number;
 }
 
 export interface Schedules {
@@ -72,6 +77,7 @@ export type PageProps<
         user: User;
     };
     events: Events;
+    event: EventDetail;
     schedules: Schedules;
     bloodStoks: BloodStoks;
 };
