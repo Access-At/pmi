@@ -66,13 +66,10 @@ export default function Detail() {
                     center={[event.data.lat, event.data.long]}
                     zoom={16}
                     zoomControl={false}
-                    className="h-full w-full"
-                    style={{ background: "#242424" }}
+                    scrollWheelZoom={false}
+                    className="h-full w-full z-0"
                 >
-                    <TileLayer
-                        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    />
+                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                     <ZoomControl position="topright" />
                     <Marker position={[event.data.lat, event.data.long]} />
                 </MapContainer>

@@ -14,9 +14,11 @@ import { Avatar } from "./ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import NavLink from "./NavLink";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import NotificationComponents from "./Notification";
 
 export default function Navbar() {
-    const user = usePage().props.auth.user;
+    const { auth } = usePage().props;
+    const user = auth.user;
 
     return (
         <nav className="sticky top-0 z-50 bg-background">
@@ -53,28 +55,12 @@ export default function Navbar() {
                                 <DialogTrigger className="hover:text-primary hover:underline hover:underline-offset-4">
                                     Notifikasi
                                 </DialogTrigger>
+
                                 <DialogContent>
                                     <h1 className="text-xl font-bold">
                                         Notifikasi
                                     </h1>
-                                    <div className="flex flex-col items-center justify-center gap-4">
-                                        <img
-                                            src="/assets/images/Notifikasi.png"
-                                            alt="notifikasi"
-                                        />
-                                        <div className="flex flex-col items-center justify-center text-center text-muted-foreground">
-                                            <h2 className="text-xl font-bold text-black">
-                                                Belum ada Notifikasi
-                                            </h2>
-                                            <p>
-                                                Tidak ada notifikasi saat ini.
-                                            </p>
-                                            <p>
-                                                Notifikasi baru akan muncul di
-                                                halaman ini
-                                            </p>
-                                        </div>
-                                    </div>
+                                    <NotificationComponents />
                                 </DialogContent>
                             </Dialog>
                         ) : null}

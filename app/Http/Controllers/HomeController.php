@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Services\EventService;
+use App\Services\NotificationService;
 use App\Services\ScheduleService;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 class HomeController extends Controller
 {
+  public function __construct()
+  {
+    Inertia::share([
+      'notifications' => NotificationService::getNotifications(),
+    ]);
+  }
   public function index()
   {
     return Inertia::render('Home', [

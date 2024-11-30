@@ -70,6 +70,11 @@ export interface Details {
     };
 }
 
+export interface Notifications {
+    date: string;
+    description: string;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
 > = T & {
@@ -78,6 +83,9 @@ export type PageProps<
     };
     flash: {
         success: string;
+    };
+    notifications: {
+        data: Notifications[];
     };
     user: User;
     events: Events;
