@@ -17,6 +17,7 @@ class NotificationRepository
     return $query;
   }
 
+
   public static function saveNotification($data)
   {
     $query = Notification::create($data);

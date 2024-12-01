@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Models\Notification;
 
 class Event extends Model
 {
@@ -23,5 +24,10 @@ class Event extends Model
 
             $data->slug = $slug;
         });
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'event_id', 'id');
     }
 }

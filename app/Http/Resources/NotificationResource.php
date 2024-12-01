@@ -24,6 +24,8 @@ class NotificationResource extends JsonResource
 
     if ($diff_in_days <= 5 && $diff_in_days % 1 === 0) {
       return [
+        'id' => $this->id,
+        'slug' => $this->event->slug,
         'date' => $date . ' ' . $start_time,
         'description' => "Event {$this->event->title} yang di laksanakan tersisa " . (int)abs(Carbon::parse($this->event->date)->diffInDays(Carbon::now())) . " hari pada tanggal"
       ];

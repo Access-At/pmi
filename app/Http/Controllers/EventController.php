@@ -11,6 +11,7 @@ class EventController extends Controller
     public function getEvents()
     {
         $events = EventService::getEvents();
+        // dd($events);
         return response()->json($events);
     }
 
@@ -25,6 +26,12 @@ class EventController extends Controller
                 'error' => $th->getMessage()
             ], 404);
         }
+    }
+
+    public function getUserClickedEvents()
+    {
+        $events = EventService::getUserClickedEvents();
+        return response()->json($events);
     }
 
     public function createEvent(EventRequest $request)

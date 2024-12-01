@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->prefix('notif')->group(function () {
   Route::post('/', [NotificationController::class, 'saveNotification'])->name('notif.store');
   Route::delete('/{slug}', [NotificationController::class, 'removeNotification'])->name('notif.delete');
+  Route::get('/user/clicked-events', [EventController::class, 'getUserClickedEvents'])->name('user.clicked.events');
 });
 
 require __DIR__ . '/auth.php';

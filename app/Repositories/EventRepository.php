@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Event;
+use App\Models\Notification;
 
 class EventRepository
 {
@@ -36,6 +37,15 @@ class EventRepository
     $event->update($data);
 
     return $event;
+  }
+
+  public static function getUserClickedEvents()
+  {
+    $user = auth()->user()->id;
+    $clickEvents = Notification::where('user_id', $user)
+    ->pluck('event_id');
+    // dd($clickEvents);
+    return $clickEvents;
   }
 
   public static function deleteEvent($id)

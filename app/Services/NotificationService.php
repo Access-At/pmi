@@ -10,6 +10,8 @@ use App\Repositories\EventRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\ScheduleRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 
 class NotificationService
 {
@@ -23,6 +25,9 @@ class NotificationService
     // Implementasi penyimpanan notifikasi ke database
     $user = Auth::user()->id;
     $event = EventRepository::getEventsBySlug($slug);
+    if(!$event) {
+      throw new ModelNotFoundException('Event not found');
+    }
 
     return new NotificationResource(NotificationRepository::saveNotification([
       'user_id' => $user,

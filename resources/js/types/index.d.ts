@@ -20,6 +20,7 @@ export interface EventDetail {
 }
 
 export interface EventData {
+    id(id: any): unknown;
     title: string;
     slug: string;
     description: string;
@@ -93,3 +94,4 @@ export type PageProps<
     schedules: Schedules;
     bloodStoks: BloodStoks;
 };
+

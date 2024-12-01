@@ -20,6 +20,7 @@ class EventResource extends JsonResource
         $end_time = Carbon::createFromFormat('H:i:s', $this->end_time)->translatedFormat('H:i');
 
         return [
+            'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
             'description' => $this->description,

@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Http\Resources\EventResource;
 use App\Repositories\EventRepository;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Event;
+use App\Models\Notification;
 
 class EventService
 {
@@ -16,6 +18,18 @@ class EventService
     public static function getEventsBySlug($slug)
     {
         return new EventResource(EventRepository::getEventsBySlug($slug));
+    }
+
+    public static function getUserClickedEvents()
+    {
+        $user = auth()->user()->id;
+        
+        $clickedEvents = Notification::where('user_id', $user)
+        ->where('event_id', request()->event_id)
+        ->exists();
+        return $clickedEvents;
+        // $events = Event::whereIn('id', $clickedEventIds)->get();
+        // return $events;
     }
 
     public static function createEvent($data)

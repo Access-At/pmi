@@ -1,6 +1,7 @@
 import z from "zod";
 
 export const EventResponseSchema = z.object({
+    id: z.number(),
     title: z.string(),
     slug: z.string(),
     description: z.string(),
