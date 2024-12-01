@@ -28,6 +28,7 @@ class User extends Authenticatable
     'domisili',
     'type',
     'rhesus',
+    'role',
     'image_path',
   ];
 

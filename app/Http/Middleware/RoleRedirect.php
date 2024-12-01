@@ -18,11 +18,11 @@ class RoleRedirect
         if (auth()->check()) {
             $user = auth()->user();
 
-            if ($user->isAdmin() && $request->path() === 'home') {
+            if ($user->role === 'admin') {
                 return redirect()->route('dashboard');
             }
 
-            if (!$user->isAdmin() && $request->path() === 'dashboard') {
+            if (!$user->role === 'user') {
                 return redirect()->route('home');
             }
         }
