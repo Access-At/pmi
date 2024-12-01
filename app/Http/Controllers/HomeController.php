@@ -89,8 +89,5 @@ class HomeController extends Controller
     return Inertia::render('PrivacyPolicy');
   }
 
-  public function editProfile()
-  {
-    return Inertia::render('Profile/Edit');
-  }
+  
 }

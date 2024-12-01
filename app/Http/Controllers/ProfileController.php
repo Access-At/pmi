@@ -63,6 +63,20 @@ class ProfileController extends Controller
     return Redirect::route('profile.edit')->with('success', 'Profile updated successfully');
   }
 
+  public function updatePassword(Request $request)
+  {
+    $request->validate([
+      'current_password' => ['required', 'current_password'],
+      'password' => ['required', 'confirmed', Rules\Password::defaults()],
+      'password_confirmation' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
+
+    $user = $request->user();
+    $user->password = Hash::make($request->password);
+    $user->save();
+    return response()->json(['message' => 'Password updated successfully']);
+  }
+
   /**
    * Delete the user's account.
    */
@@ -83,4 +97,6 @@ class ProfileController extends Controller
 
     return Redirect::to('/');
   }
+
+
 }
