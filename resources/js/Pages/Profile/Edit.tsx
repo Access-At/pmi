@@ -1,6 +1,5 @@
-import { Head, Link, useForm, usePage } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import GuestLayout from "@/Layouts/GuestLayout";
-import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
 import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
@@ -16,32 +15,26 @@ import { FormEventHandler } from "react";
 import InputError from "@/Components/InputError";
 import { PencilIcon } from "lucide-react";
 import { toast } from "sonner";
+import EditLayout from "@/Layouts/EditLayout";
 
 export default function Edit() {
     const { auth, flash } = usePage().props;
     const user = auth.user;
-    const {
-        data,
-        setData,
-        put,
-        processing,
-        errors,
-        reset,
-        recentlySuccessful,
-    } = useForm({
-        username: user.username,
-        registration_number: user.registration_number,
-        phone_number: user.phone_number,
-        gender: user.gender,
-        domisili: user.domisili,
-        type: user.type,
-        rhesus: user.rhesus,
-    });
+    const { data, setData, put, processing, errors, recentlySuccessful } =
+        useForm({
+            username: user.username,
+            registration_number: user.registration_number,
+            phone_number: user.phone_number,
+            gender: user.gender,
+            domisili: user.domisili,
+            type: user.type,
+            rhesus: user.rhesus,
+        });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        put("/profile");
+        put(route("profile.update"));
     };
 
     if (recentlySuccessful)
@@ -52,242 +45,196 @@ export default function Edit() {
     return (
         <GuestLayout>
             <Head title="Profile" />
-            <section className="flex flex-col md:flex-row items-start justify-center px-6 gap-4 my-10">
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-xl font-bold text-primary">
-                        Edit Profile
-                    </h1>
-                    <div className="flex flex-col sm:flex-row md:flex-col gap-2">
-                        <Link
-                            href={route("profile.edit", user.id)}
-                            className={cn(
-                                route().current("profile.edit")
-                                    ? "font-bold"
-                                    : "text-muted-foreground"
-                            )}
+            <EditLayout>
+                <div className="flex flex-col items-center gap-4 justify-center w-full md:w-fit md:justify-start">
+                    <div className="relative">
+                        <Avatar className="bg-primary/50 flex items-center justify-center h-20 w-20">
+                            {/* <AvatarImage
+                                    src={user.image}
+                                    alt={user.name}
+                                /> */}
+                            <AvatarFallback className="flex items-center justify-center font-bold uppercase">
+                                {user.username.replace(/^(.).*$/, "$1")}
+                            </AvatarFallback>
+                        </Avatar>
+                        <label
+                            htmlFor="photo-upload"
+                            className="absolute bottom-0 right-0 p-2 bg-white rounded-full shadow-lg cursor-pointer hover:bg-gray-50"
                         >
-                            Profile
-                        </Link>
-                        {/* <Link
-                            href={route("password.edit")}
-                            className={cn(
-                                route().current("password.edit")
-                                    ? "font-bold"
-                                    : "text-muted-foreground"
-                            )}
-                        >
-                            Password
-                        </Link> */}
+                            <PencilIcon className="w-4 h-4" />
+                            <input
+                                id="photo-upload"
+                                type="file"
+                                className="hidden"
+                                accept="image/*"
+                                // onChange={handlePhotoChange}
+                            />
+                        </label>
                     </div>
                 </div>
-                <div className="flex flex-col md:flex-row flex-1 gap-4 w-full">
-                    <div className="flex flex-col items-center gap-4 justify-center w-full md:w-fit md:justify-start">
-                        <div className="relative">
-                            <Avatar className="bg-primary/50 flex items-center justify-center h-20 w-20">
-                                {/* <AvatarImage
-                          src={user.image}
-                          alt={user.name}
-                      /> */}
-                                <AvatarFallback className="flex items-center justify-center font-bold uppercase">
-                                    {user.username.replace(/^(.).*$/, "$1")}
-                                </AvatarFallback>
-                            </Avatar>
-                            <label
-                                htmlFor="photo-upload"
-                                className="absolute bottom-0 right-0 p-2 bg-white rounded-full shadow-lg cursor-pointer hover:bg-gray-50"
-                            >
-                                <PencilIcon className="w-4 h-4" />
-                                <input
-                                    id="photo-upload"
-                                    type="file"
-                                    className="hidden"
-                                    accept="image/*"
-                                    // onChange={handlePhotoChange}
-                                />
-                            </label>
-                        </div>
+                <form onSubmit={submit} className="w-full space-y-4">
+                    <div className="flex flex-col gap-2">
+                        <Label className="font-bold" htmlFor="username">
+                            Username
+                        </Label>
+
+                        <Input
+                            className="block w-full focus:ring-primary focus:border-none border border-gray-300 rounded-lg shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
+                            id="username"
+                            name="username"
+                            value={data.username}
+                            autoComplete="username"
+                            onChange={(e) =>
+                                setData("username", e.target.value)
+                            }
+                            required
+                        />
+
+                        <InputError
+                            message={errors.username}
+                            className="mt-2"
+                        />
                     </div>
-                    <form onSubmit={submit} className="w-full space-y-4">
+
+                    <div className="flex flex-col gap-2">
+                        <Label className="font-bold" htmlFor="registration">
+                            Nomor Registrasi
+                        </Label>
+                        <Input
+                            className="block w-full focus:ring-primary focus:border-none border border-gray-300 rounded-lg shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
+                            id="registration"
+                            name="registration_number"
+                            value={data.registration_number}
+                            onChange={(e) =>
+                                setData("registration_number", e.target.value)
+                            }
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <Label className="font-bold" htmlFor="notelepon">
+                            No Telepon
+                        </Label>
+
+                        <Input
+                            className="block w-full focus:ring-primary focus:border-none border border-gray-300 rounded-lg shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
+                            id="notelepon"
+                            name="notelepon"
+                            value={data.phone_number}
+                            onChange={(e) =>
+                                setData("phone_number", e.target.value)
+                            }
+                            required
+                        />
+
+                        <InputError
+                            message={errors.phone_number}
+                            className="mt-2"
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <Label htmlFor="gender" className="font-bold">
+                            Jenis Kelamin
+                        </Label>
+                        <Select
+                            name="gander"
+                            value={data.gender}
+                            onValueChange={(value) => setData("gender", value)}
+                        >
+                            <SelectTrigger className="border border-gray-300">
+                                <SelectValue placeholder="Pilih jenis kelamin" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="male">Laki-laki</SelectItem>
+                                <SelectItem value="female">
+                                    Perempuan
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
+
+                        <InputError message={errors.gender} className="mt-2" />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <Label htmlFor="domisili" className="font-bold">
+                            Kota Domisili
+                        </Label>
+                        <Input
+                            className="block w-full focus:ring-primary focus:border-none border border-gray-300 rounded-lg shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
+                            id="domisili"
+                            name="domisili"
+                            value={data.domisili}
+                            onChange={(e) =>
+                                setData("domisili", e.target.value)
+                            }
+                        />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
                         <div className="flex flex-col gap-2">
-                            <Label className="font-bold" htmlFor="username">
-                                Username
-                            </Label>
-
-                            <Input
-                                className="block w-full focus:ring-primary focus:border-none border border-gray-300 rounded-lg shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
-                                id="username"
-                                name="username"
-                                value={data.username}
-                                autoComplete="username"
-                                onChange={(e) =>
-                                    setData("username", e.target.value)
-                                }
-                                required
-                            />
-
-                            <InputError
-                                message={errors.username}
-                                className="mt-2"
-                            />
-                        </div>
-
-                        <div className="flex flex-col gap-2">
-                            <Label className="font-bold" htmlFor="registration">
-                                Nomor Registrasi
-                            </Label>
-                            <Input
-                                className="block w-full focus:ring-primary focus:border-none border border-gray-300 rounded-lg shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
-                                id="registration"
-                                name="registration_number"
-                                value={data.registration_number}
-                                onChange={(e) =>
-                                    setData(
-                                        "registration_number",
-                                        e.target.value
-                                    )
-                                }
-                            />
-                        </div>
-
-                        <div className="flex flex-col gap-2">
-                            <Label className="font-bold" htmlFor="notelepon">
-                                No Telepon
-                            </Label>
-
-                            <Input
-                                className="block w-full focus:ring-primary focus:border-none border border-gray-300 rounded-lg shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
-                                id="notelepon"
-                                name="notelepon"
-                                value={data.phone_number}
-                                onChange={(e) =>
-                                    setData("phone_number", e.target.value)
-                                }
-                                required
-                            />
-
-                            <InputError
-                                message={errors.phone_number}
-                                className="mt-2"
-                            />
-                        </div>
-
-                        <div className="flex flex-col gap-2">
-                            <Label htmlFor="gender" className="font-bold">
-                                Jenis Kelamin
+                            <Label htmlFor="blood_type" className="font-bold">
+                                Golongan Darah
                             </Label>
                             <Select
-                                name="gander"
-                                value={data.gender}
+                                name="type"
+                                value={data.type}
                                 onValueChange={(value) =>
-                                    setData("gender", value)
+                                    setData("type", value)
                                 }
                             >
                                 <SelectTrigger className="border border-gray-300">
-                                    <SelectValue placeholder="Pilih jenis kelamin" />
+                                    <SelectValue placeholder="Pilih" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="male">
-                                        Laki-laki
-                                    </SelectItem>
-                                    <SelectItem value="female">
-                                        Perempuan
-                                    </SelectItem>
+                                    <SelectItem value="A">A</SelectItem>
+                                    <SelectItem value="B">B</SelectItem>
+                                    <SelectItem value="AB">AB</SelectItem>
+                                    <SelectItem value="O">O</SelectItem>
                                 </SelectContent>
                             </Select>
 
                             <InputError
-                                message={errors.gender}
+                                message={errors.type}
                                 className="mt-2"
                             />
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="domisili" className="font-bold">
-                                Kota Domisili
+                            <Label htmlFor="rhesus" className="font-bold">
+                                Rhesus
                             </Label>
-                            <Input
-                                className="block w-full focus:ring-primary focus:border-none border border-gray-300 rounded-lg shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700"
-                                id="domisili"
-                                name="domisili"
-                                value={data.domisili}
-                                onChange={(e) =>
-                                    setData("domisili", e.target.value)
+                            <Select
+                                name="rhesus"
+                                value={data.rhesus}
+                                onValueChange={(value) =>
+                                    setData("rhesus", value)
                                 }
+                            >
+                                <SelectTrigger className="border border-gray-300">
+                                    <SelectValue placeholder="Pilih" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="positive">+</SelectItem>
+                                    <SelectItem value="negative">-</SelectItem>
+                                </SelectContent>
+                            </Select>
+
+                            <InputError
+                                message={errors.rhesus}
+                                className="mt-2"
                             />
                         </div>
+                    </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="flex flex-col gap-2">
-                                <Label
-                                    htmlFor="blood_type"
-                                    className="font-bold"
-                                >
-                                    Golongan Darah
-                                </Label>
-                                <Select
-                                    name="type"
-                                    value={data.type}
-                                    onValueChange={(value) =>
-                                        setData("type", value)
-                                    }
-                                >
-                                    <SelectTrigger className="border border-gray-300">
-                                        <SelectValue placeholder="Pilih" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="A">A</SelectItem>
-                                        <SelectItem value="B">B</SelectItem>
-                                        <SelectItem value="AB">AB</SelectItem>
-                                        <SelectItem value="O">O</SelectItem>
-                                    </SelectContent>
-                                </Select>
-
-                                <InputError
-                                    message={errors.type}
-                                    className="mt-2"
-                                />
-                            </div>
-
-                            <div className="flex flex-col gap-2">
-                                <Label htmlFor="rhesus" className="font-bold">
-                                    Rhesus
-                                </Label>
-                                <Select
-                                    name="rhesus"
-                                    value={data.rhesus}
-                                    onValueChange={(value) =>
-                                        setData("rhesus", value)
-                                    }
-                                >
-                                    <SelectTrigger className="border border-gray-300">
-                                        <SelectValue placeholder="Pilih" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="positive">
-                                            +
-                                        </SelectItem>
-                                        <SelectItem value="negative">
-                                            -
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
-
-                                <InputError
-                                    message={errors.rhesus}
-                                    className="mt-2"
-                                />
-                            </div>
-                        </div>
-
-                        <Button
-                            className="w-full rounded-full text-lg"
-                            disabled={processing}
-                        >
-                            save
-                        </Button>
-                    </form>
-                </div>
-            </section>
+                    <Button
+                        className="w-full rounded-full text-lg"
+                        disabled={processing}
+                    >
+                        save
+                    </Button>
+                </form>
+            </EditLayout>
         </GuestLayout>
     );
 }

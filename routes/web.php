@@ -32,12 +32,13 @@ Route::get('/dashboard', function () {
   return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-  Route::get('/profile', [ProfileController::class, 'show'])->name("profile.show");
-  Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-  Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-  Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-  Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update'); 
+Route::middleware('auth')->prefix('profile')->group(function () {
+  Route::get('/', [ProfileController::class, 'show'])->name("profile.show");
+  Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+  Route::put('/', [ProfileController::class, 'update'])->name('profile.update');
+  Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+  Route::get('/password', [ProfileController::class, 'editPassword'])->name('profile.password.edit');
+  Route::put('/password/update', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
   // Route::get("/password/{id}", [PasswordController::class, 'edit'])->name('password.edit');
   // Route::patch("/password", [PasswordController::class, 'update'])->name('password.update');
 });

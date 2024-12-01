@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PasswordUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
 use App\Services\ProfileService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Validation\Rules;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -63,18 +66,20 @@ class ProfileController extends Controller
     return Redirect::route('profile.edit')->with('success', 'Profile updated successfully');
   }
 
-  public function updatePassword(Request $request)
+  public function editPassword()
   {
-    $request->validate([
-      'current_password' => ['required', 'current_password'],
-      'password' => ['required', 'confirmed', Rules\Password::defaults()],
-      'password_confirmation' => ['required', 'confirmed', Rules\Password::defaults()],
-    ]);
+    return Inertia::render('Profile/ChangePassword');
+  }
 
-    $user = $request->user();
-    $user->password = Hash::make($request->password);
-    $user->save();
-    return response()->json(['message' => 'Password updated successfully']);
+  public function updatePassword(PasswordUpdateRequest $request)
+  {
+    $user = Auth::user();
+
+    if ($user instanceof User) {
+      $user->password = Hash::make($request->password);
+      $user->update();
+    }
+    return Redirect::route('profile.password.edit')->with('success', 'Password updated successfully');
   }
 
   /**
@@ -97,6 +102,4 @@ class ProfileController extends Controller
 
     return Redirect::to('/');
   }
-
-
 }
