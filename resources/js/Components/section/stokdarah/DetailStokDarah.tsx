@@ -6,9 +6,7 @@ import {
 import { usePage } from "@inertiajs/react";
 
 export default function StokDarahSection() {
-    const { props } = usePage();
-    const { bloodStoks } = props;
-    console.log(props);
+    const { bloodStoks } = usePage().props;
     return (
         <section className="my-10 px-6 space-y-5">
             <h1 className="text-2xl font-bold md:text-3xl">

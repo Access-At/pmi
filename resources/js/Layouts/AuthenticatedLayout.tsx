@@ -5,10 +5,6 @@ export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    const { props } = usePage();
-    console.log(props);
-    // const user = usePage().props.auth.user;
-
     return (
         <div className="min-h-screen bg-gray-100">
             {header && (

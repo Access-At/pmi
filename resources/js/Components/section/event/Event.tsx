@@ -25,7 +25,6 @@ export default function EventSection() {
                             return notification.slug === item.slug;
                         }
                     );
-                    console.log("isEventNotified:", isEventNotified);
                     return (
                         <Card className="w-full" key={index}>
                             <CardContent className="p-4">
