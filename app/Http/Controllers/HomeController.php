@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Services\EventService;
 use App\Services\NotificationService;
 use App\Services\ScheduleService;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -12,8 +14,23 @@ class HomeController extends Controller
 {
   public function __construct()
   {
+    $user = Auth::user();
+    if (!$user) return;
+    $notifications = NotificationService::getNotifications();
+    $notifications = $notifications->filter(function ($notification) {
+      $startEvent = Carbon::parse($notification->event->start_time);
+      $now = now();
+      $diffInDays = $startEvent->diffInDays($now);
+      return $diffInDays <= 5 && $diffInDays % 1 === 0;
+    });
+
+
     Inertia::share([
       'notifications' => NotificationService::getNotifications(),
+      // 'notifications' => $notifications,
+      // "notifications" => [
+      //   'data' => []
+      // ]
     ]);
   }
   public function index()

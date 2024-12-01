@@ -1,12 +1,11 @@
 import { Notifications } from "@/types";
 import { usePage } from "@inertiajs/react";
-import { DialogContent } from "./ui/dialog";
 import { CalendarDaysIcon } from "lucide-react";
 import EachUtil from "@/lib/EachUtil";
+import { divIcon } from "leaflet";
 
 export default function NotificationComponents() {
     const { notifications } = usePage().props;
-    console.log(notifications);
     return notifications.data.length <= 0 ? (
         <div className="flex flex-col items-center justify-center gap-4">
             <img src="/assets/images/Notifikasi.png" alt="notifikasi" />
@@ -19,18 +18,20 @@ export default function NotificationComponents() {
             </div>
         </div>
     ) : (
-        <div className="flex gap-4 items-center">
-            <span className="bg-primary/30 rounded-full w-[5rem] h-[3.5rem] flex items-center justify-center">
-                <CalendarDaysIcon className="w-6 h-6 text-primary" />
-            </span>
+        <div className="flex flex-col gap-4 items-center">
             <EachUtil
                 of={notifications.data}
                 render={(item: Notifications, index) => (
-                    <div key={index} className="flex flex-col gap-2">
-                        <p className="text-muted-foreground">
-                            {item.description}
-                        </p>
-                        <p className="text-primary">{item.date}</p>
+                    <div key={index} className="flex gap-4 items-center">
+                        <span className="bg-primary/30 rounded-full p-4 flex items-center justify-center">
+                            <CalendarDaysIcon className="w-6 h-6 text-primary" />
+                        </span>
+                        <div className="flex flex-col gap-2">
+                            <p className="text-muted-foreground">
+                                {item.description}
+                            </p>
+                            <p className="text-primary">{item.date}</p>
+                        </div>
                     </div>
                 )}
             />

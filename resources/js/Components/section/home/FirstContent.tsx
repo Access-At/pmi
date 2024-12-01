@@ -1,6 +1,6 @@
 export default function FirstContentSection() {
     return (
-        <section className="flex flex-col md:flex-row items-center justify-betweenw-full">
+        <section className="flex flex-col md:flex-row items-center justify-between w-full">
             <div className="flex flex-col px-6 gap-3 py-52">
                 <h2 className="text-[1.25rem] md:text-[2.5rem] xl:text-[5rem] font-bold md:max-w-sm xl:max-w-3xl">
                     Infromasi Donor Darah yang Lengkap

@@ -9,16 +9,9 @@ use Inertia\Inertia;
 
 class NotificationController extends Controller
 {
-  public static function getNotifications()
+  public function saveNotification(Request $request)
   {
-
-    $data = NotificationService::getNotifications();
-    return $data;
-  }
-
-  public function saveNotification($event)
-  {
-    // $event = $request->input('event');
+    $event = $request->input();
     return NotificationService::saveNotification($event);
   }
 

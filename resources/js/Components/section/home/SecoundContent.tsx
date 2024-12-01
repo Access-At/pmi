@@ -10,7 +10,7 @@ export default function SecoundContent() {
                     className="w-[40rem] md:w-[50rem]"
                 />
             </div>
-            <div className="flex flex-col md:flex-row items-center gap-10 md:gap-20 px-6 relative z-10 top-[-15rem] md:top-[-30rem] lg:top-[-35rem]">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-20 px-6 relative z-10 top-[-15rem] md:top-[-30rem] lg:top-[-35rem]">
                 <img
                     src="/assets/images/stock-ilustration.png"
                     alt="stok"
