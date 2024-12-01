@@ -72,6 +72,7 @@ export interface Details {
 }
 
 export interface Notifications {
+    slug: string;
     date: string;
     description: string;
 }
@@ -94,4 +95,3 @@ export type PageProps<
     schedules: Schedules;
     bloodStoks: BloodStoks;
 };
-

@@ -13,7 +13,13 @@ import {
 import { Avatar } from "./ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import NavLink from "./NavLink";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "./ui/dialog";
 import NotificationComponents from "./Notification";
 
 export default function Navbar() {
@@ -57,9 +63,11 @@ export default function Navbar() {
                                 </DialogTrigger>
 
                                 <DialogContent>
-                                    <h1 className="text-xl font-bold">
-                                        Notifikasi
-                                    </h1>
+                                    <DialogHeader>
+                                        <DialogTitle className="text-xl font-bold">
+                                            Notifikasi
+                                        </DialogTitle>
+                                    </DialogHeader>
                                     <NotificationComponents />
                                 </DialogContent>
                             </Dialog>

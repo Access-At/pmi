@@ -5,13 +5,22 @@ import {
     CardFooter,
     CardHeader,
 } from "@/Components/ui/card";
-import { usePage } from "@inertiajs/react";
+import { cn } from "@/lib/utils";
+import { router, usePage } from "@inertiajs/react";
 import { CalendarDaysIcon, Clock9Icon, MapPinIcon } from "lucide-react";
 import { MapContainer, Marker, TileLayer, ZoomControl } from "react-leaflet";
 
 export default function Detail() {
-    const { event } = usePage().props;
-    console.log(event.data);
+    const { event, notifications } = usePage().props;
+    const isEventNotified = notifications.data.some(
+        (notification) => notification.slug === event.data.slug
+    );
+
+    const handlerReminder = (eventSlug: string) => {
+        router.post(route("notif.store"), {
+            event: eventSlug,
+        });
+    };
     return (
         <section className="flex flex-col md:flex-row px-6 w-full gap-5 my-4">
             <div className="flex flex-col gap-5">
@@ -54,9 +63,23 @@ export default function Detail() {
                         <h2 className="text-xl font-bold">Description</h2>
                         <p>{event.data.description}</p>
 
-                        <Button className="bg-gray-400 rounded-full">
-                            Ingkatkan Saya
-                        </Button>
+                        {!isEventNotified ? (
+                            <Button
+                                className={cn(
+                                    "w-full sm:w-auto bg-gray-400 rounded-full",
+                                    isEventNotified && "disabled"
+                                )}
+                                onClick={() => handlerReminder(event.data.slug)}
+                            >
+                                Ingatkan Saya
+                            </Button>
+                        ) : (
+                            <>
+                                <span className="text-sm text-muted-foreground text-center">
+                                    Telah Diingatkan!
+                                </span>
+                            </>
+                        )}
                     </CardContent>
                 </Card>
             </div>

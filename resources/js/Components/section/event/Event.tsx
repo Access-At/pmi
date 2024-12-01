@@ -2,10 +2,8 @@ import { Button } from "@/Components/ui/button";
 import { Card, CardContent } from "@/Components/ui/card";
 import EachUtil from "@/lib/EachUtil";
 import { EventResponseType } from "@/schemas/response-schema";
-import { Link, router, useForm, usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import { CalendarDaysIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { cn } from "@/lib/utils";
 
 export default function EventSection() {
@@ -15,7 +13,7 @@ export default function EventSection() {
         router.post(route("notif.store"), {
             event: eventSlug,
         });
-    }
+    };
     return (
         <section className="px-4 md:px-6 lg:px-8 space-y-4 my-10">
             <h1 className="text-2xl md:text-3xl font-bold">Event</h1>
@@ -26,7 +24,7 @@ export default function EventSection() {
                         (notification) => {
                             return notification.slug === item.slug;
                         }
-                    )
+                    );
                     console.log("isEventNotified:", isEventNotified);
                     return (
                         <Card className="w-full" key={index}>
@@ -63,29 +61,28 @@ export default function EventSection() {
                                             <Button
                                                 className={cn(
                                                     "w-full sm:w-auto bg-gray-400 rounded-full",
-                                                    isEventNotified && "disabled"
+                                                    isEventNotified &&
+                                                        "disabled"
                                                 )}
                                                 onClick={() =>
                                                     handlerReminder(item.slug)
                                                 }
-                                            // disabled={isClicked}
                                             >
                                                 Ingatkan Saya
                                             </Button>
                                         ) : (
                                             <>
-                                            <span className="text-sm text-muted-foreground"> Telah Diingatkan! </span>
-                                                </> 
+                                                <span className="text-sm text-muted-foreground">
+                                                    Telah Diingatkan!
+                                                </span>
+                                            </>
                                         )}
-
-                                       
                                     </div>
                                 </div>
                             </CardContent>
                         </Card>
-                    )
-                }
-                }
+                    );
+                }}
             />
         </section>
     );
