@@ -20,7 +20,7 @@ export default function EventSection() {
             <EachUtil
                 of={events.data}
                 render={(item: EventResponseType, index) => {
-                    const isEventNotified = notifications.data.some(
+                    const isEventNotified = notifications?.data.some(
                         (notification) => {
                             return notification.slug === item.slug;
                         }

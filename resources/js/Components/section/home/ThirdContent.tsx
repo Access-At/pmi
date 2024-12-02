@@ -13,7 +13,7 @@ export default function ThirdContent() {
                         <span className="text-rose-400">bags</span>
                     </h1>
                 </div>
-                <h1 className="font-bold text-[1.25rem] md:text-[2.5rem] xl:text-[5rem] w-[15rem] md:w-[25rem] lg:w-[50rem]">
+                <h1 className="font-bold text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] w-[15rem] md:w-[25rem] lg:w-[30rem] xl:w-[40rem]">
                     Download Aplikasi BLOODBAGS Sekarang
                 </h1>
                 <p className="text-xl md:text-2xl xl:text-4xl text-muted-foreground">
@@ -36,7 +36,7 @@ export default function ThirdContent() {
                 <img
                     src="/assets/images/phone.png"
                     alt="phone"
-                    className="w-[12rem] lg:w-[17rem] relative z-10 left-[-17rem] top-[1rem] lg:left-[-25rem]"
+                    className="w-[12rem] xl:w-[17rem] relative z-10 left-[-17rem] top-[1rem] lg:left-[-15rem] xl:left-[-20rem]"
                 />
             </div>
         </section>
