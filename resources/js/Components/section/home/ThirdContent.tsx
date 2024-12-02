@@ -36,7 +36,7 @@ export default function ThirdContent() {
                 <img
                     src="/assets/images/phone.png"
                     alt="phone"
-                    className="w-[12rem] xl:w-[17rem] relative z-10 left-[-17rem] top-[1rem] lg:left-[-15rem] xl:left-[-20rem]"
+                    className="w-[12rem] xl:w-[17rem] relative z-10 left-[-17rem] top-[1rem] lg:left-[-15rem] xl:left-[-20rem] 2xl:left-[-25rem]"
                 />
             </div>
         </section>
