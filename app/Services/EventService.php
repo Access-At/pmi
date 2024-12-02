@@ -16,6 +16,7 @@ class EventService
     return EventResource::collection(EventRepository::getEvents());
   }
 
+
   public static function getEventsBySlug($slug)
   {
     return new EventResource(EventRepository::getEventsBySlug($slug));

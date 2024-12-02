@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PasswordUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
+use App\Services\EventService;
 use App\Services\ProfileService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Validation\Rules;
@@ -23,8 +24,10 @@ class ProfileController extends Controller
    */
   public function show()
   {
+    $user = Auth::user();
+
     return Inertia::render('Profile/Show', [
-      'user' => Auth::user()
+      'user' => $user,
     ]);
   }
   public function edit()
