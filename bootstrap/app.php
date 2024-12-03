@@ -16,10 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
-        //
-    })
-    ->withMiddleware(function (Middleware $middleware) {
-        // hapus '*' jika sudah tidak diperlukan
+        // hapus '*' jika ingin mengaktifkan CSRF
         $middleware->validateCsrfTokens(except: [
             '*',
         ]);
