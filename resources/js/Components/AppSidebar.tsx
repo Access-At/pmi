@@ -4,10 +4,10 @@ import {
     SidebarFooter,
     SidebarHeader,
 } from "@/Components/ui/sidebar";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import { Separator } from "@/Components/ui/separator";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import NavLink from "./NavLink";
 
 export function AppSidebar() {
@@ -49,7 +49,11 @@ export function AppSidebar() {
                     Stock Darah
                 </NavLink>
             </SidebarContent>
-            <SidebarFooter />
+            <SidebarFooter>
+                <Button onClick={() => router.post(route("logout"))}>
+                    Logout
+                </Button>
+            </SidebarFooter>
         </Sidebar>
     );
 }

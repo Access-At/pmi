@@ -77,6 +77,11 @@ export interface Notifications {
     description: string;
 }
 
+export interface Activities {
+    title: string;
+    date: string;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
 > = T & {
@@ -88,6 +93,9 @@ export type PageProps<
     };
     notifications: {
         data: Notifications[];
+    };
+    activities: {
+        data: Activities[];
     };
     user: User;
     events: Events;

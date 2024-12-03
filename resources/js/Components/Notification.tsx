@@ -7,6 +7,7 @@ import { ScrollArea } from "./ui/scroll-area";
 
 export default function NotificationComponents() {
     const { notifications } = usePage().props;
+    console.log(notifications);
     return notifications.data.length <= 0 ? (
         <div className="flex flex-col items-center justify-center gap-4">
             <img src="/assets/images/Notifikasi.png" alt="notifikasi" />
