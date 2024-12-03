@@ -22,5 +22,14 @@ class UserSeeder extends Seeder
             'phone_number' => '08123456789',
             'terms' => true
         ]);
+
+        User::create([
+            'username' => 'user',
+            'email' => 'Us3r@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
+            'phone_number' => '08123456739',
+            'terms' => true
+        ]);
     }
 }

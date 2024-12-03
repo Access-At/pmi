@@ -16,7 +16,6 @@ class ScheduleDetailResource extends JsonResource
     {
         $details = $this->details;
 
-        // DONE
         $totalByBloodType = collect($details)->groupBy('blood_type')->map(function ($items) {
             return [
                 'type' => $items->first()->blood_type_format,

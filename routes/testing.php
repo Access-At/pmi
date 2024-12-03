@@ -23,12 +23,9 @@ Route::prefix('schedule')->group(function () {
 });
 
 
-Route::prefix('/notif')->group(function () {
-    Route::get('/', [NotificationController::class, 'getNotifications'])->name('notif');
-    Route::get('/{id}', [NotificationController::class, 'saveNotification'])->name('notif.save');
+Route::prefix('/notif_coba')->group(function () {
+    Route::post('/', [NotificationController::class, 'saveNotification'])->name('notif.save');
     Route::delete('/{id}', [NotificationController::class, 'removeNotification'])->name('notif.remove');
 
-    // Route::get('/', [ScheduleController::class, 'getNotif'])->name('notif');
-    // Route::post('/', [ScheduleController::class, 'createNotif'])->name('notif.create');
-    // Route::delete('/{id}', [ScheduleController::class, 'deleteNotif'])->name('notif.delete');
+    Route::get('/acitivy', [NotificationController::class, 'getActivities'])->name('notif.activity');
 });
