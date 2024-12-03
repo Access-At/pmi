@@ -1,7 +1,7 @@
 import InputError from "@/Components/InputError";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/Components/ui/label";
 import EditLayout from "@/Layouts/EditLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, useForm, usePage } from "@inertiajs/react";

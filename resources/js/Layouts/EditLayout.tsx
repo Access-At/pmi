@@ -1,11 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Link, usePage } from "@inertiajs/react";
+import { PropsWithChildren } from "react";
 
-export default function EditLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function EditLayout({ children }: PropsWithChildren) {
     const user = usePage().props.auth.user;
     return (
         <section className="flex flex-col md:flex-row items-start justify-center px-6 gap-4 my-10">

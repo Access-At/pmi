@@ -6,7 +6,7 @@ import InputError from "@/Components/InputError";
 import AuthLayout from "@/Layouts/AuthLayout";
 import Back from "@/Components/Back";
 import { Input } from "@/Components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/Components/ui/label";
 
 export default function Login({
     status,

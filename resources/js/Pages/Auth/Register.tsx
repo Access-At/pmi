@@ -7,7 +7,7 @@ import { Checkbox } from "@/Components/ui/checkbox";
 import { FormEventHandler } from "react";
 import { Input } from "@/Components/ui/input";
 import InputError from "@/Components/InputError";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/Components/ui/label";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({

@@ -10,7 +10,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/Components/ui/select";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/Components/ui/label";
 import { FormEventHandler } from "react";
 import InputError from "@/Components/InputError";
 import { PencilIcon } from "lucide-react";

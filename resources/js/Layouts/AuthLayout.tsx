@@ -1,13 +1,12 @@
 import { Head } from "@inertiajs/react";
+import { PropsWithChildren } from "react";
 
-import GuestLayout from "@/Layouts/GuestLayout";
-
-interface Props {
-    children: React.ReactNode;
+export default function AuthLayout({
+    title,
+    children,
+}: PropsWithChildren<{
     title: string;
-}
-
-export default function AuthLayout({ children, title }: Props) {
+}>) {
     return (
         <div className="flex flex-col max-h-screen sm:flex-row">
             <Head title={title} />

@@ -28,9 +28,13 @@ Route::prefix('/')->group(function () {
   Route::get('stok-darah/{slug}', [HomeController::class, "stokDarah"])->name("stok");
 });
 
-Route::get('/dashboard', function () {
-  return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard/event', function () {
+  return Inertia::render('Dashboard/Event');
+})->middleware(['auth', 'verified'])->name('dashboard.event');
+
+Route::get('/dashboard/stokDarah', function () {
+  return Inertia::render('Dashboard/Stok');
+})->middleware(['auth', 'verified'])->name('dashboard.stok');
 
 Route::middleware('auth')->prefix('profile')->group(function () {
   Route::get('/', [ProfileController::class, 'show'])->name("profile.show");
