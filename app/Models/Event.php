@@ -25,9 +25,4 @@ class Event extends Model
             $data->slug = $slug;
         });
     }
-
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class, 'event_id', 'id');
-    }
 }

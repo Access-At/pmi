@@ -21,7 +21,7 @@ class NotificationResource extends JsonResource
         return [
             'slug' => $this->event->slug,
             'date' => $date . ' ' . $start_time,
-            'description' => "Event {$this->event->title} yang di laksanakan tersisa " . (int)abs(Carbon::parse($this->event->date)->diffInDays(Carbon::now())) . " hari pada tanggal"
+            'description' => "Event {$this->event->title} yang di laksanakan tersisa " . round(abs(Carbon::parse($this->event->date)->diffInDays(Carbon::now()))) . " hari pada tanggal"
         ];
     }
 }
