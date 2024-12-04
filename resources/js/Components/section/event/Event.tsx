@@ -7,7 +7,7 @@ import { CalendarDaysIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function EventSection() {
-    const { events, notifications } = usePage().props;
+    const { events, activities } = usePage().props;
 
     const handlerReminder = (eventSlug: string) => {
         router.post(route("notif.store"), {
@@ -20,9 +20,9 @@ export default function EventSection() {
             <EachUtil
                 of={events.data}
                 render={(item: EventResponseType, index) => {
-                    const isEventNotified = notifications?.data.some(
-                        (notification) => {
-                            return notification.slug === item.slug;
+                    const isEventNotified = activities?.data.some(
+                        (activity) => {
+                            return activity.slug === item.slug;
                         }
                     );
                     return (
