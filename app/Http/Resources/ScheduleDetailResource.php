@@ -36,7 +36,6 @@ class ScheduleDetailResource extends JsonResource
             'description' => $this->description,
             'location' => $this->location,
             'image' => asset("storage/schedules/" . $this->image),
-            // 'details' => DetailStockResource::collection($details),
             'details' => $dataTable,
             'totals' => [
                 'by_blood_type' => $totalByBloodType,

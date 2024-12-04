@@ -7,6 +7,12 @@ use App\Models\StockDetail;
 
 class StockDetailRepository
 {
+    public static function getStockDetails()
+    {
+        $query = StockDetail::get();
+        return $query;
+    }
+
     public static function createStockDetail($data)
     {
         $stockDetail = StockDetail::create($data);

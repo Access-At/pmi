@@ -37,6 +37,16 @@ class ActivityRepository
         return $query;
     }
 
+    public static function getActifityDashboard()
+    {
+        $query = Activity::with([
+            'event',
+            'user'
+        ])->get();
+
+        return $query;
+    }
+
     public static function saveActifity($event)
     {
         $query = Activity::create([

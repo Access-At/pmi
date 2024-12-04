@@ -13,6 +13,12 @@ class EventRepository
         return $query;
     }
 
+    public static function getEventsDashboard()
+    {
+        $query = Event::orderBy('id', 'desc')->get();
+        return $query;
+    }
+
     public static function getEventsBySlug($slug)
     {
         $query = Event::where('slug', $slug)->first();

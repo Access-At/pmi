@@ -19,6 +19,11 @@ class ActivityService
         return ActivityResource::collection(ActivityRepository::getActivities());
     }
 
+    public static function getActifityDashboard()
+    {
+        return ActivityRepository::getActifityDashboard();
+    }
+
     public static function saveActifity($data)
     {
         $event = EventRepository::getEventsBySlug($data);

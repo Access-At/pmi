@@ -5,7 +5,6 @@ namespace App\Http\Resources;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class EventResource extends JsonResource
 {
@@ -20,7 +19,6 @@ class EventResource extends JsonResource
         $end_time = Carbon::createFromFormat('H:i:s', $this->end_time)->translatedFormat('H:i');
 
         return [
-            'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
             'description' => $this->description,
