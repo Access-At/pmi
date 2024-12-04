@@ -20,6 +20,7 @@ class ActivityResource extends JsonResource
 
     return [
       'title' => $this->event->title,
+      'slug' => $this->event->slug,
       'date' => $date . ' ' . $start_time,
     ];
   }

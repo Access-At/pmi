@@ -9,7 +9,7 @@ class EventRepository
 {
     public static function getEvents()
     {
-        $query = Event::orderBy('date', 'asc')->where('date', '>=', now())->get();
+        $query = Event::orderBy('created_at', 'desc')->where('date', '>=', now())->get();
         return $query;
     }
 

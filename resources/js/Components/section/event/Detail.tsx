@@ -11,9 +11,9 @@ import { CalendarDaysIcon, Clock9Icon, MapPinIcon } from "lucide-react";
 import { MapContainer, Marker, TileLayer, ZoomControl } from "react-leaflet";
 
 export default function Detail() {
-    const { event, notifications } = usePage().props;
-    const isEventNotified = notifications?.data.some(
-        (notification) => notification.slug === event.data.slug
+    const { event, activities } = usePage().props;
+    const isEventNotified = activities?.data.some(
+        (activity) => activity.slug === event.data.slug
     );
 
     const handlerReminder = (eventSlug: string) => {

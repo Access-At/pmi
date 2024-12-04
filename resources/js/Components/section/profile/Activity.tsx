@@ -42,22 +42,25 @@ export default function Activity() {
                         <EachUtil
                             of={activities.data}
                             render={(item, index) => (
-                                <Card
+                                <Link
+                                    href={route("event.detail", item.slug)}
                                     key={index}
-                                    className="flex gap-3 items-center align-middle p-5 rounded-lg w-full"
+                                    className="w-full"
                                 >
-                                    <CardHeader className="bg-primary/30 rounded-full p-3 flex items-center justify-center">
-                                        <CalendarDaysIcon className="w-6 h-6 text-primary" />
-                                    </CardHeader>
-                                    <CardContent className="p-0">
-                                        <h6 className="font-bold">
-                                            {item.title}
-                                        </h6>
-                                        <p className="text-muted-foreground text-sm">
-                                            {item.date}
-                                        </p>
-                                    </CardContent>
-                                </Card>
+                                    <Card className="flex gap-3 items-center align-middle p-5 rounded-lg w-full">
+                                        <CardHeader className="bg-primary/30 rounded-full p-3 flex items-center justify-center">
+                                            <CalendarDaysIcon className="w-6 h-6 text-primary" />
+                                        </CardHeader>
+                                        <CardContent className="p-0">
+                                            <h6 className="font-bold">
+                                                {item.title}
+                                            </h6>
+                                            <p className="text-muted-foreground text-sm">
+                                                {item.date}
+                                            </p>
+                                        </CardContent>
+                                    </Card>
+                                </Link>
                             )}
                         />
                     </div>

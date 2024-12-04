@@ -25,19 +25,23 @@ class HomeController extends Controller
   {
     $events = EventService::getEvents();
     $schedules = ScheduleService::getSchedules();
+    $activities = ActivityService::getActivities();
 
     return Inertia::render('JadwalDonor', [
       'events' => $events,
       'schedules' => $schedules,
+      'activities' => $activities
     ]);
   }
 
   public function event($slug)
   {
     $event = EventService::getEventsBySlug($slug);
+    $activities = ActivityService::getActivities();
 
     return Inertia::render('EventDetail', [
-      "event" => $event
+      "event" => $event,
+      'activities' => $activities
     ]);
   }
 

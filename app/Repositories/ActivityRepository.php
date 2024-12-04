@@ -12,7 +12,7 @@ class ActivityRepository
     {
         $user = Auth::user()->id;
 
-        $query = Activity::with([
+        $query = Activity::orderby("created_at", "desc")->with([
             'event',
             'user'
         ])->where('user_id', '=', $user)
@@ -28,7 +28,7 @@ class ActivityRepository
     {
         $user = Auth::user()->id;
 
-        $query = Activity::with([
+        $query = Activity::orderby("created_at", "desc")->with([
             'event',
             'user'
         ])->where('user_id', '=', $user)

@@ -79,6 +79,7 @@ export interface Notifications {
 
 export interface Activities {
     title: string;
+    slug: string;
     date: string;
 }
 

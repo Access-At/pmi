@@ -12,7 +12,35 @@ export default function Dashboard() {
             location: "PMI Jakarta",
             description: "Event donor darah rutin",
         },
-        // Add more sample data as needed
+        {
+            id: "2",
+            name: "Donor Darah Universitas",
+            datetime: "2024-01-25 10:00",
+            location: "Universitas Indonesia",
+            description: "Donor darah mahasiswa",
+        },
+        {
+            id: "3",
+            name: "Donor Darah Perusahaan",
+            datetime: "2024-02-01 11:00",
+            location: "PT ABC",
+            description: "Donor darah karyawan",
+        },
+        {
+            id: "4",
+            name: "Donor Darah Komunitas",
+            datetime: "2024-02-05 09:30",
+            location: "Taman Kota",
+            description: "Donor darah untuk masyarakat umum",
+        },
+        {
+            id: "5",
+            name: "Donor Darah Sekolah",
+            datetime: "2024-02-10 08:00",
+            location: "SMA Negeri 1",
+            description: "Donor darah untuk siswa dan guru",
+        },
+        // Tambahkan lebih banyak data sampel sesuai kebutuhan
     ];
     const headEvent = [
         { name: "Event" },
