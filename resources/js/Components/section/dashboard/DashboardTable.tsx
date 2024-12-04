@@ -9,6 +9,8 @@ import {
     TableRow,
 } from "@/Components/ui/table";
 import EachUtil from "@/lib/EachUtil";
+import { EventData } from "@/types";
+import EditDashboard from "./EditDashboard";
 
 export default function DashboardTable({
     data,
@@ -18,7 +20,7 @@ export default function DashboardTable({
     head: any;
 }) {
     return (
-        <ScrollArea className="h-[30rem] w-full">
+        <ScrollArea className="h-[52rem] w-full">
             <Table>
                 <TableHeader className="border-y">
                     <TableRow>
@@ -33,19 +35,17 @@ export default function DashboardTable({
                 <TableBody>
                     <EachUtil
                         of={data}
-                        render={(event) => (
-                            <TableRow key={event.id}>
-                                <TableCell>{event.name}</TableCell>
-                                <TableCell>{event.datetime}</TableCell>
+                        render={(event: EventData, index) => (
+                            <TableRow key={index}>
+                                <TableCell>{event.title}</TableCell>
+                                <TableCell>{event.date}</TableCell>
+                                <TableCell>{event.time}</TableCell>
                                 <TableCell>{event.location}</TableCell>
-                                <TableCell>{event.description}</TableCell>
-                                <TableCell className="text-right space-x-2">
-                                    <Button
-                                        size="sm"
-                                        className="bg-cyan-300/50 hover:bg-cyan-300 text-cyan-600 hover:text-white"
-                                    >
-                                        Update
-                                    </Button>
+                                <TableCell className="w-[40rem]">
+                                    {event.description}
+                                </TableCell>
+                                <TableCell className="text-right space-x-2 space-y-2">
+                                    <EditDashboard event eventData={event} />
                                     <Button
                                         size="sm"
                                         className="bg-primary/30 hover:bg-primary text-red-600 hover:text-white"

@@ -10,23 +10,26 @@ import {
 } from "@/Components/ui/dialog";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
+import { EventData } from "@/types";
 import { useForm } from "@inertiajs/react";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler } from "react";
 
-export default function AddDashboard({
+export default function EditDashboard({
+    eventData,
     event = false,
     stok = false,
 }: {
+    eventData?: EventData;
     event?: any;
     stok?: any;
 }) {
     const { data, setData, post, processing, errors } = useForm({
-        title: "",
-        date: "",
-        start_time: "",
-        end_time: "",
-        location: "",
-        description: "",
+        title: eventData!.title,
+        date: eventData!.date,
+        start_time: eventData!.start_time,
+        end_time: eventData!.end_time,
+        location: eventData!.location,
+        description: eventData!.description,
     });
     const eventSubmit: FormEventHandler = (e) => {
         e.preventDefault;
@@ -35,14 +38,17 @@ export default function AddDashboard({
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="bg-lime-500/50 text-lime-600 font-bold w-[6rem] rounded-full hover:bg-lime-500 hover:text-white">
-                    Add
+                <Button
+                    size="sm"
+                    className="bg-cyan-300/50 hover:bg-cyan-300 text-cyan-600 hover:text-white"
+                >
+                    Update
                 </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        Add {event ? "Event" : null}
+                        Update {event ? "Event" : null}
                         {stok ? "Stok Darah" : null}
                     </DialogTitle>
                 </DialogHeader>
