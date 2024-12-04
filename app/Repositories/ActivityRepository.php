@@ -17,7 +17,7 @@ class ActivityRepository
             'user'
         ])->where('user_id', '=', $user)
             ->whereHas('event', function ($q) {
-                $q->whereDate('date', '>=', now());
+                $q->whereDate('date', '>=', now())->whereDate('date', '<=', now()->addDays(5));
             })
             ->get();
 
