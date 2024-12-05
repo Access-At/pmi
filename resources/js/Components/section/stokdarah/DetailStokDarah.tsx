@@ -1,8 +1,5 @@
 import EachUtil from "@/lib/EachUtil";
-import {
-    BloodStoksTotalByTypeResponseType,
-    BloodStoksTotalResponseType,
-} from "@/schemas/response-schema";
+import { ByBloodType } from "@/types";
 import { usePage } from "@inertiajs/react";
 
 export default function StokDarahSection() {
@@ -15,10 +12,7 @@ export default function StokDarahSection() {
             <div className="flex flex-wrap flex-grow md:flex-row items-center xl:justify-center justify-start gap-10 xl:gap-20 xl:h-[18rem]">
                 <EachUtil
                     of={bloodStoks.data.totals.by_blood_type}
-                    render={(
-                        item: BloodStoksTotalByTypeResponseType,
-                        index
-                    ) => (
+                    render={(item: ByBloodType, index) => (
                         <div
                             key={index}
                             className="xl:relative xl:z-10 flex flex-col gap-5"

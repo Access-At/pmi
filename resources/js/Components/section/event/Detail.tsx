@@ -35,7 +35,7 @@ export default function Detail() {
                 <Card className="overflow-hidden flex flex-col gap-4">
                     <CardHeader className="w-full p-0">
                         <img
-                            src="https://picsum.photos/200/300"
+                            src={"https://picsum.photos/200/300"}
                             alt="image-place"
                             className="h-[400px] w-full object-cover"
                         />
@@ -45,13 +45,13 @@ export default function Detail() {
                         <span className="flex items-center gap-2">
                             <CalendarDaysIcon className="w-6 h-6 text-red-600" />
                             <p className="text-muted-foreground">
-                                {event.data.date}
+                                {event.data.date_format}
                             </p>
                         </span>
                         <span className="flex items-center gap-2">
                             <Clock9Icon className="w-6 h-6 text-red-600" />
                             <p className="text-muted-foreground">
-                                {event.data.time}
+                                {event.data.start_time} - {event.data.end_time}
                             </p>
                         </span>
                         <span className="flex items-center gap-2">

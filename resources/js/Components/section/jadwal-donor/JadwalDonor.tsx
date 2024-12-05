@@ -7,7 +7,7 @@ import {
     CarouselPrevious,
 } from "@/Components/ui/carousel";
 import EachUtil from "@/lib/EachUtil";
-import { ScheduleResponseType } from "@/schemas/response-schema";
+import { ScheduleData } from "@/types";
 import { Link, usePage } from "@inertiajs/react";
 
 export default function JadwalDonorSection() {
@@ -25,12 +25,12 @@ export default function JadwalDonorSection() {
                 <CarouselContent className="-ml-2 md:-ml-4">
                     <EachUtil
                         of={schedules.data}
-                        render={(item: ScheduleResponseType, index) => (
+                        render={(item: ScheduleData, index) => (
                             <CarouselItem
                                 className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
                                 key={index}
                             >
-                                <Link href={``}>
+                                <Link href={route("stok", item.slug)}>
                                     <div className="relative transform transition-transform hover:scale-105">
                                         <Card className="relative overflow-hidden group">
                                             <div className="absolute inset-0 bg-red-600 transform rotate-3 scale-105 -z-10" />

@@ -11,6 +11,7 @@ import {
 import EachUtil from "@/lib/EachUtil";
 import { EventData } from "@/types";
 import EditDashboard from "./EditDashboard";
+import { router } from "@inertiajs/react";
 
 export default function DashboardTable({
     data,
@@ -38,8 +39,10 @@ export default function DashboardTable({
                         render={(event: EventData, index) => (
                             <TableRow key={index}>
                                 <TableCell>{event.title}</TableCell>
-                                <TableCell>{event.date}</TableCell>
-                                <TableCell>{event.time}</TableCell>
+                                <TableCell>{event.date_format}</TableCell>
+                                <TableCell>
+                                    {event.start_time} - {event.end_time}
+                                </TableCell>
                                 <TableCell>{event.location}</TableCell>
                                 <TableCell className="w-[40rem]">
                                     {event.description}
@@ -49,6 +52,14 @@ export default function DashboardTable({
                                     <Button
                                         size="sm"
                                         className="bg-primary/30 hover:bg-primary text-red-600 hover:text-white"
+                                        onClick={() => {
+                                            router.delete(
+                                                route(
+                                                    "dashboard.event.delete",
+                                                    event.slug
+                                                )
+                                            );
+                                        }}
                                     >
                                         Delete
                                     </Button>

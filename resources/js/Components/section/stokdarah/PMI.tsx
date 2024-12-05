@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/Components/ui/card";
 import EachUtil from "@/lib/EachUtil";
+import { ScheduleData } from "@/types";
 import { Link, usePage } from "@inertiajs/react";
 
 export default function PMI() {
@@ -10,7 +11,7 @@ export default function PMI() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <EachUtil
                     of={schedules.data}
-                    render={(item, index) => (
+                    render={(item: ScheduleData, index) => (
                         <Link href={route("stok", item.slug)} key={index}>
                             <div className="relative transform transition-transform hover:scale-105">
                                 <Card className="relative overflow-hidden group">

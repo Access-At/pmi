@@ -1,7 +1,7 @@
 import { AppSidebar } from "@/Components/AppSidebar";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
-import { SidebarProvider } from "@/Components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/Components/ui/sidebar";
 import { SearchIcon } from "lucide-react";
 import { PropsWithChildren } from "react";
 
@@ -13,7 +13,8 @@ export default function AuthenticatedLayout({ children }: PropsWithChildren) {
 
                 <main className="flex flex-col w-full my-2 mr-4 ml-2 gap-4">
                     <nav className="bg-white w-full py-4 px-4 rounded-lg shadow-sm">
-                        <div className="flex gap-4">
+                        <div className="flex items-center gap-4">
+                            <SidebarTrigger className="md:hidden" />
                             <div className="relative flex-1">
                                 <Input
                                     type="search"

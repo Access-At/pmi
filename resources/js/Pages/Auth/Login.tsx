@@ -106,7 +106,12 @@ export default function Login({
                             )}
                         </div>
 
-                        <Button className="w-full rounded-full">Login</Button>
+                        <Button
+                            className="w-full rounded-full"
+                            disabled={processing}
+                        >
+                            Login
+                        </Button>
                     </form>
                 </div>
                 <footer className="flex gap-2">

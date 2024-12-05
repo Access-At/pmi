@@ -24,9 +24,11 @@ export interface EventData {
     title: string;
     slug: string;
     description: string;
+    date_format: string;
     date: string;
     image: string;
-    time: string;
+    start_time: string;
+    end_time: string;
     location: string;
     lat: number;
     long: number;

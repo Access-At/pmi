@@ -1,10 +1,10 @@
 import { Button } from "@/Components/ui/button";
 import { Card, CardContent } from "@/Components/ui/card";
 import EachUtil from "@/lib/EachUtil";
-import { EventResponseType } from "@/schemas/response-schema";
 import { Link, router, usePage } from "@inertiajs/react";
 import { CalendarDaysIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { EventData } from "@/types";
 
 export default function EventSection() {
     const { events, activities } = usePage().props;
@@ -19,7 +19,7 @@ export default function EventSection() {
             <h1 className="text-2xl md:text-3xl font-bold">Event</h1>
             <EachUtil
                 of={events.data}
-                render={(item: EventResponseType, index) => {
+                render={(item: EventData, index) => {
                     const isEventNotified = activities?.data.some(
                         (activity) => {
                             return activity.slug === item.slug;
@@ -44,10 +44,10 @@ export default function EventSection() {
                                                 {item.title}
                                             </h3>
                                             <p className="text-sm text-muted-foreground">
-                                                {item.date}
+                                                {item.date_format}
                                             </p>
                                             <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground">
-                                                <span>{item.time}</span>
+                                                <span>{item.start_time}</span>
                                                 <span className="hidden sm:inline">
                                                     •
                                                 </span>

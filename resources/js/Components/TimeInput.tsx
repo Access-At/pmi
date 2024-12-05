@@ -24,7 +24,7 @@ export default function TimeInput({
                     role="combobox"
                     aria-expanded={open}
                     className={cn(
-                        "w-full justify-between",
+                        "w-full justify-between border-2 border-gray-300 py-5 focus:ring-primary focus:border-primary",
                         !time && "text-muted-foreground",
                         className
                     )}

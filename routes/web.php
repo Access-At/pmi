@@ -23,8 +23,11 @@ Route::prefix('/')->group(function () {
 
 Route::middleware('auth')->prefix('dashboard')->group(function () {
   Route::get('/event', [DashboardController::class, 'event'])->name('dashboard.event');
+  Route::post('/event', [DashboardController::class, 'createEvent'])->name('dashboard.event.store');
+  Route::patch('/event/{slug}', [DashboardController::class, 'updateEvent'])->name('dashboard.event.update');
+  Route::delete('/event/{slug}', [DashboardController::class, 'deleteEvent'])->name('dashboard.event.delete');
 
-  Route::get('/stokDarah', [DashboardController::class, 'stok'])->name('dashboard.stok');
+  Route::get('/stok-darah', [DashboardController::class, 'stok'])->name('dashboard.stok');
 });
 
 

@@ -7,7 +7,7 @@ import {
     TableRow,
 } from "@/Components/ui/table";
 import EachUtil from "@/lib/EachUtil";
-import { BloodStoksTotalByTypeResponseType } from "@/schemas/response-schema";
+import { ByBloodType } from "@/types";
 import { usePage } from "@inertiajs/react";
 
 export default function TableStock() {
@@ -53,10 +53,7 @@ export default function TableStock() {
                                         of={
                                             bloodStoks.data.totals.by_blood_type
                                         }
-                                        render={(
-                                            item: BloodStoksTotalByTypeResponseType,
-                                            index
-                                        ) => (
+                                        render={(item: ByBloodType, index) => (
                                             <TableHead
                                                 key={item.type}
                                                 className={`text-center ${
