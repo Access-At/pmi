@@ -34,12 +34,14 @@ export default function DashboardTable({
                                 <TableHead>{head.name}</TableHead>
                             )}
                         />
-                        <EachUtil
-                            of={bloodCategory}
-                            render={(category) => (
-                                <TableHead>{category}</TableHead>
-                            )}
-                        />
+                        {schedule ? (
+                            <EachUtil
+                                of={bloodCategory}
+                                render={(category) => (
+                                    <TableHead>{category}</TableHead>
+                                )}
+                            />
+                        ) : null}
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>
                 </TableHeader>
