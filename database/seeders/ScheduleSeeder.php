@@ -26,7 +26,6 @@ class ScheduleSeeder extends Seeder
                 'title' => $title,
                 'slug' => Str::slug($title),
                 'location' => $faker->city,
-                'description' => $faker->text('200'),
                 'image' => 'https://picsum.photos/200/300',
             ]);
 

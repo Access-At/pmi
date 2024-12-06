@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ScheduleDetailResource extends JsonResource
+class ScheduleDashboardResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,20 +16,20 @@ class ScheduleDetailResource extends JsonResource
     {
         $details = $this->details;
 
-        $totalByBloodType = collect($details)->groupBy('blood_type')->map(function ($items) {
-            return [
-                'type' => $items->first()->blood_type_format,
-                'total' => $items->sum('amount')
-            ];
-        })->values();
-
-
         $dataTable = collect($details)->groupBy(['blood_category', 'blood_type'])->map(function ($types) {
             return $types->map(function ($items) {
                 return $items->sum('amount');
             });
         });
 
+        $totalByBloodType = collect($details)->groupBy('blood_category')->map(function ($items) {
+            return [
+                'type' => $items->first()->blood_category,
+                'total' => $items->sum('amount')
+            ];
+        })->values();
+
+        // return parent::toArray($request);
         return [
             'title' => $this->title,
             'slug' => $this->slug,

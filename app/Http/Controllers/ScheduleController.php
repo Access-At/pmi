@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
-    public function getSchedules()
+    public function getSchedules(Request $request)
     {
-        $schedules = ScheduleService::getSchedules();
+        $schedules = ScheduleService::getSchedulesDashboard($request->input('search'));
         return response()->json($schedules);
     }
 
