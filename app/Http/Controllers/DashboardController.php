@@ -11,48 +11,48 @@ use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    public function event()
-    {
-        $user = Auth::user();
-        $is_admin = $user->role === 'admin';
-        if (!$is_admin) return redirect()->route('home');
+  public function event(Request $request)
+  {
+    $user = Auth::user();
+    $is_admin = $user->role === 'admin';
+    if (!$is_admin) return redirect()->route('home');
 
-        $events = EventService::getEventsDashboard();
-        return Inertia::render('Dashboard/Event', [
-            'events' => $events
-        ]);
-    }
+    $events = EventService::getEventsDashboard($request->input('search'));
+    return Inertia::render('Dashboard/Event', [
+      'events' => $events,
+    ]);
+  }
 
-    public function createEvent(EventRequest $request)
-    {
-        EventService::createEvent($request->validated());
+  public function createEvent(EventRequest $request)
+  {
+    EventService::createEvent($request->validated());
 
-        return Redirect::route('dashboard.event')->with('success', 'Event created successfully');
-    }
+    return Redirect::route('dashboard.event')->with('success', 'Event created successfully');
+  }
 
-    public function updateEvent($slug, EventRequest $request)
-    {
-        EventService::updateEvent($slug, $request->validated());
-        return Redirect::route('dashboard.event')->with('success', 'Event updated successfully');
-    }
+  public function updateEvent($slug, EventRequest $request)
+  {
+    EventService::updateEvent($slug, $request->validated());
+    return Redirect::route('dashboard.event')->with('success', 'Event updated successfully');
+  }
 
-    public function deleteEvent($slug)
-    {
-        EventService::deleteEvent($slug);
-        return Redirect::route('dashboard.event')->with('success', 'Event deleted successfully');
-    }
+  public function deleteEvent($slug)
+  {
+    EventService::deleteEvent($slug);
+    return Redirect::route('dashboard.event')->with('success', 'Event deleted successfully');
+  }
 
-    // stok Darah
-    public function stok()
-    {
-        $user = Auth::user();
-        $is_admin = $user->role === 'admin';
-        if (!$is_admin) return redirect()->route('home');
+  // stok Darah
+  public function stok()
+  {
+    $user = Auth::user();
+    $is_admin = $user->role === 'admin';
+    if (!$is_admin) return redirect()->route('home');
 
-        return Inertia::render('Dashboard/Stok');
-    }
+    return Inertia::render('Dashboard/Stok');
+  }
 
-    // public function createStok() {}
-    // public function updateStok() {}
-    // public function deleteStok() {}
+  // public function createStok() {}
+  // public function updateStok() {}
+  // public function deleteStok() {}
 }

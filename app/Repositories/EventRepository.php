@@ -13,9 +13,13 @@ class EventRepository
     return $query;
   }
 
-  public static function getEventsDashboard()
+  public static function getEventsDashboard($search)
   {
-    $query = Event::orderBy('id', 'desc')->get();
+    $query = Event::query()
+      ->when($search, function ($query, $search) {
+        $query->where('title', 'like', "%{$search}%")
+          ->orWhere('location', 'like', "%{$search}%");
+      })->orderBy('id', 'desc')->get();
     return $query;
   }
 

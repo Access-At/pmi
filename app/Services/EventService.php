@@ -13,9 +13,9 @@ class EventService
     return EventResource::collection(EventRepository::getEvents());
   }
 
-  public static function getEventsDashboard()
+  public static function getEventsDashboard($search)
   {
-    return EventResource::collection(EventRepository::getEventsDashboard());
+    return EventResource::collection(EventRepository::getEventsDashboard($search));
   }
 
 

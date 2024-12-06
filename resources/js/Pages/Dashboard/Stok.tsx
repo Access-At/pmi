@@ -39,7 +39,7 @@ export default function Stok() {
                     <h1 className="text-2xl font-bold">Stok Darah</h1>
                     <AddDashboard stok />
                 </div>
-                <DashboardTable data={stokDarah} head={headEvent} />
+                <DashboardTable data={stokDarah} head={headEvent} stok />
             </div>
         </AuthenticatedLayout>
     );

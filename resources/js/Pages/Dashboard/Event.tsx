@@ -20,7 +20,7 @@ export default function Dashboard() {
                     <h1 className="text-2xl font-bold">Event Donor Darah</h1>
                     <AddDashboard event={true} />
                 </div>
-                <DashboardTable data={events.data} head={headEvent} />
+                <DashboardTable event data={events.data} head={headEvent} />
             </div>
         </AuthenticatedLayout>
     );

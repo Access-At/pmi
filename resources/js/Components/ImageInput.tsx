@@ -31,7 +31,7 @@ export default function ImageInput({ image, ...props }: ImageInputProps) {
                     "w-full border border-primary text-primary hover:bg-primary hover:text-white"
                 )}
             >
-                {image ? image.name : "Select Image"}
+                {image ? "Change Image" : "Select Image"}
                 {/* Select Image */}
             </Button>
             {/* {image && (
