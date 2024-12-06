@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ScheduleService
 {
+    public static function getSchedulesDashboard()
+    {
+        return ScheduleRepository::getSchedules();
+    }
+
     public static function getSchedules()
     {
         return ScheduleResource::collection(ScheduleRepository::getSchedules());
