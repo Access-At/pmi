@@ -10,6 +10,7 @@ import {
 import { ByBloodType } from "@/types";
 import EachUtil from "@/lib/EachUtil";
 import { usePage } from "@inertiajs/react";
+import { formatCategory } from "@/lib/utils";
 
 export default function TableStock() {
     const { bloodStoks } = usePage().props;
@@ -88,7 +89,7 @@ export default function TableStock() {
                                             className="odd:bg-red-50 even:bg-background font-bold"
                                         >
                                             <TableCell className="border-r border-gray-200">
-                                                {category}
+                                                {formatCategory(category)}
                                             </TableCell>
                                             <EachUtil
                                                 of={bloodTypes}

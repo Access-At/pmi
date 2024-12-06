@@ -44,6 +44,23 @@ export interface ScheduleData {
     description: string;
     location: string;
     image: string;
+    details: ScheduleDetails[];
+    totals: ScheduleTotals;
+}
+
+export interface ScheduleDetails {
+    [category: string]: {
+        [bloodType: string]: number;
+    };
+}
+
+export interface ScheduleTotals {
+    by_category: ByCategory[];
+}
+
+export interface ByCategory {
+    category: string;
+    total: number;
 }
 
 export interface BloodStoks {

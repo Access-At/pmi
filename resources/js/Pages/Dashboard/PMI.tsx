@@ -5,15 +5,7 @@ import { Head, usePage } from "@inertiajs/react";
 
 export default function PMI() {
     const { schedules } = usePage().props;
-    const headEvent = [
-        { name: "name" },
-        { name: "Location" },
-        { name: "AHF" },
-        { name: "FFP" },
-        { name: "PCRL" },
-        { name: "PC" },
-        { name: "TC" },
-    ];
+    const headEvent = [{ name: "name" }, { name: "Location" }];
     return (
         <AuthenticatedLayout>
             <Head title="Dashboard" />
@@ -22,7 +14,11 @@ export default function PMI() {
                     <h1 className="text-2xl font-bold">Daftar PMI</h1>
                     <AddDashboard schedule />
                 </div>
-                <DashboardTable data={schedules} head={headEvent} schedule />
+                <DashboardTable
+                    data={schedules.data}
+                    head={headEvent}
+                    schedule
+                />
             </div>
         </AuthenticatedLayout>
     );

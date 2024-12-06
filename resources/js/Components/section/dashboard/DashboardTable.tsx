@@ -9,6 +9,7 @@ import {
 import EachUtil from "@/lib/EachUtil";
 import EventBodyTable from "./EventBodyTable";
 import ScheduleBodyTable from "./ScheduleBodyTable";
+import { ByCategory, ScheduleData } from "@/types";
 
 export default function DashboardTable({
     data,
@@ -21,6 +22,7 @@ export default function DashboardTable({
     event?: boolean;
     schedule?: boolean;
 }) {
+    const bloodCategory = ["AHF", "FFP", "PCLR", "PC", "TC"];
     return (
         <ScrollArea className="h-[52rem] w-full">
             <Table>
@@ -32,6 +34,13 @@ export default function DashboardTable({
                                 <TableHead>{head.name}</TableHead>
                             )}
                         />
+                        <EachUtil
+                            of={bloodCategory}
+                            render={(category) => (
+                                <TableHead>{category}</TableHead>
+                            )}
+                        />
+                        <TableHead className="text-right">Action</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>

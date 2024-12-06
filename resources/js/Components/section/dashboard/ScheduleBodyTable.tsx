@@ -1,16 +1,20 @@
 import { TableRow, TableCell } from "@/Components/ui/table";
 import EachUtil from "@/lib/EachUtil";
-import { ScheduleData } from "@/types";
+import { ByCategory, ScheduleData } from "@/types";
 import { router } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
 import EditDashboard from "./EditDashboard";
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/Components/ui/popover";
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/Components/ui/hover-card";
+import { Separator } from "@/Components/ui/separator";
+import { formatCategory } from "@/lib/utils";
 
 export default function ScheduleBodyTable({ data }: { data: ScheduleData[] }) {
+    const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+
     return (
         <EachUtil
             of={data}
@@ -18,11 +22,46 @@ export default function ScheduleBodyTable({ data }: { data: ScheduleData[] }) {
                 <TableRow key={index}>
                     <TableCell>{schedule.title}</TableCell>
                     <TableCell>{schedule.location}</TableCell>
-                    <TableCell>{schedule.location}</TableCell>
-                    <TableCell>{schedule.location}</TableCell>
-                    <TableCell>{schedule.location}</TableCell>
-                    <TableCell>{schedule.location}</TableCell>
-                    <TableCell>{schedule.location}</TableCell>
+
+                    <EachUtil
+                        of={schedule.totals.by_category}
+                        render={(item: ByCategory) => {
+                            const category = item.category;
+                            return (
+                                <TableCell>
+                                    <HoverCard>
+                                        <HoverCardTrigger>
+                                            {item.total}
+                                        </HoverCardTrigger>
+                                        <HoverCardContent className="space-y-2">
+                                            <h5 className="font-bold">
+                                                {formatCategory(category)}
+                                            </h5>
+                                            <Separator className="bg-black" />
+                                            <EachUtil
+                                                of={bloodTypes}
+                                                render={(type) => (
+                                                    <div className="flex gap-2 justify-between">
+                                                        <span className="font-semibold">
+                                                            {type}:
+                                                        </span>
+                                                        <span>
+                                                            {JSON.stringify(
+                                                                schedule
+                                                                    .details[
+                                                                    category as any
+                                                                ][type]
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                )}
+                                            />
+                                        </HoverCardContent>
+                                    </HoverCard>
+                                </TableCell>
+                            );
+                        }}
+                    />
                     <TableCell className="text-right space-x-2 space-y-2">
                         <EditDashboard schedule scheduleData={schedule} />
                         <Button
