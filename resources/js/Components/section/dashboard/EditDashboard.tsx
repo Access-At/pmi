@@ -6,17 +6,20 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/Components/ui/dialog";
-import { EventData } from "@/types";
+import { EventData, ScheduleData } from "@/types";
 import EditEventForm from "./EditEventForm";
+import EditScheduleForm from "./EditScheduleForm";
 
 export default function EditDashboard({
     eventData,
     event = false,
-    stok = false,
+    schedule = false,
+    scheduleData,
 }: {
     eventData?: EventData;
-    event?: any;
-    stok?: any;
+    event?: boolean;
+    scheduleData?: ScheduleData;
+    schedule?: boolean;
 }) {
     return (
         <Dialog>
@@ -32,11 +35,14 @@ export default function EditDashboard({
                 <DialogHeader>
                     <DialogTitle>
                         Update {event ? "Event" : null}
-                        {stok ? "Stok Darah" : null}
+                        {schedule ? "Daftar PMI" : null}
                     </DialogTitle>
                 </DialogHeader>
                 {event ? (
                     <EditEventForm event={eventData as EventData} />
+                ) : null}
+                {schedule ? (
+                    <EditScheduleForm schedule={scheduleData as ScheduleData} />
                 ) : null}
             </DialogContent>
         </Dialog>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
 use App\Services\EventService;
+use App\Services\ScheduleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -43,13 +44,16 @@ class DashboardController extends Controller
   }
 
   // stok Darah
-  public function pmi()
+  public function pmi(Request $request)
   {
     $user = Auth::user();
     $is_admin = $user->role === 'admin';
     if (!$is_admin) return redirect()->route('home');
 
-    return Inertia::render('Dashboard/PMI');
+    $schedules = ScheduleService::getSchedulesDashboard($request->input("search"));
+    return Inertia::render('Dashboard/PMI', [
+      'schedules' => $schedules,
+    ]);
   }
 
   // public function createStok() {}

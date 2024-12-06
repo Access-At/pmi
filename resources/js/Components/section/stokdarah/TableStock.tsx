@@ -16,6 +16,13 @@ export default function TableStock() {
     const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
     const bloodCategory = ["AHF", "FFP", "PCLR", "PC", "TC"];
 
+    const formatCategory = {
+        AHF: "AHF",
+        FFP: "FFP",
+        PCLR: "PCLR",
+        PC: "PC",
+        TC: "TC",
+    };
     const calculateTotal = (data: Record<string, number>): number => {
         return Object.values(data).reduce((sum, value) => sum + value, 0);
     };

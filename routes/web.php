@@ -27,7 +27,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
   Route::post('/event/{slug}', [DashboardController::class, 'updateEvent'])->name('dashboard.event.update');
   Route::delete('/event/{slug}', [DashboardController::class, 'deleteEvent'])->name('dashboard.event.delete');
 
-  Route::get('/stok-darah', [DashboardController::class, 'pmi'])->name('dashboard.pmi');
+  Route::get('/schedule', [DashboardController::class, 'pmi'])->name('dashboard.pmi');
 });
 
 
