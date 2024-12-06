@@ -1,31 +1,39 @@
-import { DatePicker } from "@/Components/DatePicker";
-import ImageInput from "@/Components/ImageInput";
-import InputError from "@/Components/InputError";
-import TimeInput from "@/Components/TimeInput";
-import { Button } from "@/Components/ui/button";
-import { Input } from "@/Components/ui/input";
-import { Label } from "@/Components/ui/label";
-import { id } from "date-fns/locale/id";
-import { EventData } from "@/types";
-import { useForm, usePage } from "@inertiajs/react";
-import { format, parse } from "date-fns";
 import { FormEventHandler, useEffect, useState } from "react";
+import { format, parse } from "date-fns";
+import { useForm, usePage } from "@inertiajs/react";
+
+import { Button } from "@/Components/ui/button";
+import { DatePicker } from "@/Components/DatePicker";
+import { EventData } from "@/types";
+import ImageInput from "@/Components/ImageInput";
+import { Input } from "@/Components/ui/input";
+import InputError from "@/Components/InputError";
+import { Label } from "@/Components/ui/label";
+import TimeInput from "@/Components/TimeInput";
+import { id } from "date-fns/locale/id";
 import { toast } from "sonner";
 
 export default function EditEventForm({ event }: { event: EventData }) {
     const { flash } = usePage().props;
-    const { data, setData, patch, processing, errors, recentlySuccessful } =
-        useForm({
-            title: event.title,
-            date: event.date,
-            start_time: event.start_time,
-            end_time: event.end_time,
-            location: event.location,
-            description: event.description,
-            image: event.image as unknown as File,
-            lat: event.lat.toString(),
-            long: event.long.toString(),
-        });
+    const {
+        data,
+        setData,
+        patch,
+        processing,
+        errors,
+        recentlySuccessful,
+        post,
+    } = useForm({
+        title: event.title,
+        date: event.date,
+        start_time: event.start_time,
+        end_time: event.end_time,
+        location: event.location,
+        description: event.description,
+        image: event.image as unknown as File,
+        lat: event.lat.toString(),
+        long: event.long.toString(),
+    });
 
     if (recentlySuccessful) {
         toast.success(flash.success, {
@@ -44,8 +52,7 @@ export default function EditEventForm({ event }: { event: EventData }) {
 
     const eventSubmit: FormEventHandler = (e) => {
         e.preventDefault();
-        console.log(data);
-        // patch(route("dashboard.event.update", event.slug));
+        post(route("dashboard.event.update", event.slug));
     };
 
     return (
