@@ -13,7 +13,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import EachUtil from "@/lib/EachUtil";
 import { Head } from "@inertiajs/react";
 
-export default function Stok() {
+export default function PMI() {
     const stokDarah = [
         {
             id: "1",
@@ -36,7 +36,7 @@ export default function Stok() {
             <Head title="Dashboard" />
             <div className="flex flex-col items-center gap-4 w-full p-6">
                 <div className="flex items-center justify-between w-full">
-                    <h1 className="text-2xl font-bold">Stok Darah</h1>
+                    <h1 className="text-2xl font-bold">Daftar PMI</h1>
                     <AddDashboard stok />
                 </div>
                 <DashboardTable data={stokDarah} head={headEvent} stok />

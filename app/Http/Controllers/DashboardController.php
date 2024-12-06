@@ -43,13 +43,13 @@ class DashboardController extends Controller
   }
 
   // stok Darah
-  public function stok()
+  public function pmi()
   {
     $user = Auth::user();
     $is_admin = $user->role === 'admin';
     if (!$is_admin) return redirect()->route('home');
 
-    return Inertia::render('Dashboard/Stok');
+    return Inertia::render('Dashboard/PMI');
   }
 
   // public function createStok() {}

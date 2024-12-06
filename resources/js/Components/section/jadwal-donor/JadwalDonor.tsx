@@ -20,7 +20,7 @@ export default function JadwalDonorSection() {
                     align: "start",
                     loop: true,
                 }}
-                className="w-full"
+                className="xl:w-[93%] mx-auto"
             >
                 <CarouselContent className="-ml-2 md:-ml-4">
                     <EachUtil
@@ -59,8 +59,8 @@ export default function JadwalDonorSection() {
                         )}
                     />
                 </CarouselContent>
-                <CarouselPrevious className="hidden lg:block" />
-                <CarouselNext className="hidden lg:block" />
+                <CarouselPrevious className="hidden xl:block" />
+                <CarouselNext className="hidden xl:block" />
             </Carousel>
         </section>
     );

@@ -42,11 +42,11 @@ export function AppSidebar() {
                 </NavLink>
                 <NavLink
                     dashboard
-                    href={route("dashboard.stok")}
-                    active={route().current("dashboard.stok")}
+                    href={route("dashboard.pmi")}
+                    active={route().current("dashboard.pmi")}
                     className={cn("px-10 rounded-full")}
                 >
-                    Stock Darah
+                    Daftar PMI
                 </NavLink>
             </SidebarContent>
             <SidebarFooter>
