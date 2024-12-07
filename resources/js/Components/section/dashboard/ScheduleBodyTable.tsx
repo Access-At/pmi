@@ -63,7 +63,13 @@ export default function ScheduleBodyTable({ data }: { data: ScheduleData[] }) {
                         }}
                     />
                     <TableCell className="text-right space-x-2 space-y-2">
-                        <EditDashboard schedule scheduleData={schedule} />
+                        <Button
+                            size="sm"
+                            className="bg-cyan-300/50 hover:bg-cyan-300 text-cyan-600 hover:text-white"
+                        >
+                            Update
+                        </Button>
+                        {/* <EditDashboard schedule scheduleData={schedule} /> */}
                         <Button
                             size="sm"
                             className="bg-primary/30 hover:bg-primary text-red-600 hover:text-white"

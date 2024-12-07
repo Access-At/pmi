@@ -65,8 +65,8 @@ export default function AddEventForm() {
             <div className="flex flex-col gap-2">
                 <Label htmlFor="event">Event</Label>
                 <Input
-                    id="event"
-                    name="event"
+                    id="title"
+                    name="title"
                     value={data.title}
                     className="border-2 border-gray-300 py-5 focus:ring-primary focus:border-primary"
                     onChange={(e) => setData("title", e.target.value)}

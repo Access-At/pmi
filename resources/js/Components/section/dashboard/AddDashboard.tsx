@@ -7,15 +7,8 @@ import {
     DialogTrigger,
 } from "@/Components/ui/dialog";
 import AddEventForm from "./AddEventForm";
-import AddScheduleForm from "./AddScheduleForm";
 
-export default function AddDashboard({
-    event = false,
-    schedule = false,
-}: {
-    event?: any;
-    schedule?: any;
-}) {
+export default function AddDashboard() {
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -25,13 +18,9 @@ export default function AddDashboard({
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>
-                        Add {event ? "Event" : null}
-                        {schedule ? "Daftar PMI" : null}
-                    </DialogTitle>
+                    <DialogTitle>Add Event</DialogTitle>
                 </DialogHeader>
-                {event ? <AddEventForm /> : null}
-                {schedule ? <AddScheduleForm /> : null}
+                <AddEventForm />
             </DialogContent>
         </Dialog>
     );

@@ -31,7 +31,9 @@ export default function Register() {
         <AuthLayout title="Register">
             <section className="flex-1 h-screen flex items-center flex-col justify-between py-5">
                 <div className="flex w-full flex-col px-10 gap-7">
-                    <Back />
+                    <div className="flex justify-end">
+                        <Back route={route("home")} />
+                    </div>
                     <div className="flex flex-col items-center justify-center gap-6">
                         <img
                             src="/assets/images/logo.png"

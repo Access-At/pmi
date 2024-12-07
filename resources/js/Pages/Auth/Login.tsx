@@ -38,7 +38,9 @@ export default function Login({
                     </div>
                 )}
                 <div className="flex w-full flex-col px-10 gap-7">
-                    <Back />
+                    <div className="flex justify-end">
+                        <Back route={route("home")} />
+                    </div>
                     <div className="flex flex-col items-center justify-center gap-6">
                         <img
                             src="/assets/images/logo.png"

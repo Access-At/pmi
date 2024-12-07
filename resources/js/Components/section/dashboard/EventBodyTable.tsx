@@ -21,7 +21,7 @@ export default function EventBodyTable({ data }: { data: EventData[] }) {
                         {event.description}
                     </TableCell>
                     <TableCell className="text-right space-x-2 space-y-2">
-                        <EditDashboard event eventData={event} />
+                        <EditDashboard eventData={event} />
                         <Button
                             size="sm"
                             className="bg-primary/30 hover:bg-primary text-red-600 hover:text-white"

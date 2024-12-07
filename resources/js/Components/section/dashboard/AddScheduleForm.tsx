@@ -1,22 +1,22 @@
-import { DatePicker } from "@/Components/DatePicker";
 import ImageInput from "@/Components/ImageInput";
 import InputError from "@/Components/InputError";
-import TimeInput from "@/Components/TimeInput";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/Components/ui/select";
 import { useForm, usePage } from "@inertiajs/react";
-import { setDate } from "date-fns";
-import { format } from "path";
 import { FormEventHandler } from "react";
 import { toast } from "sonner";
+import ScheduleCreateTable from "./ScheduleCreateTable";
+
+const BLOOD_CATEGORIES = [
+    { category: "AHF", name: "Anti Hemophilic Factor (AHF)" },
+    { category: "FFP", name: "Fresh Frozen Plasma (FFP)" },
+    { category: "PCLR", name: "Packed Red Cell Leuko Reduce (PCLR)" },
+    { category: "PC", name: "Packed Red Cell (PC)" },
+    { category: "TC", name: "Thrombocyte Concentrate (TC)" },
+];
+
+const BLOOD_TYPES = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 
 export default function AddScheduleForm() {
     const { flash } = usePage().props;
@@ -31,9 +31,17 @@ export default function AddScheduleForm() {
     } = useForm({
         title: "",
         location: "",
-        blood_type: "",
-        category: "",
-        image: undefined as File | undefined,
+        image: null as File | null,
+        blood_stock: BLOOD_CATEGORIES.map((item) => ({
+            category: item.category,
+            amounts: BLOOD_TYPES.reduce(
+                (acc, type) => ({
+                    ...acc,
+                    [type]: "",
+                }),
+                {}
+            ),
+        })),
     });
 
     if (recentlySuccessful) {
@@ -42,33 +50,39 @@ export default function AddScheduleForm() {
         });
     }
 
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            setData("image", file);
-        } else {
-            setData("image", undefined);
-        }
-    };
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const key = event.target.id as keyof typeof data;
+        const value =
+            event.target.type === "file"
+                ? event.target.files?.[0]
+                : event.target.value;
+        setData((state) => ({ ...state, [key]: value }));
+    }
+
+    function handleBloodStockChange(categoryIndex, bloodType, value) {
+        const updatedBloodStock = [...data.blood_stock];
+        updatedBloodStock[categoryIndex].amounts[bloodType] = value;
+        setData("blood_stock", updatedBloodStock);
+    }
 
     const eventSubmit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("dashboard.event.store"), {
-            onFinish: () => {
-                reset();
-            },
-        });
+        console.log(JSON.stringify(data));
+        // post(route("dashboard.event.store"), {
+        //     onFinish: () => reset(),
+        // });
     };
+
     return (
         <form onSubmit={eventSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-                <Label htmlFor="event">Event</Label>
+                <Label htmlFor="event">Title</Label>
                 <Input
-                    id="event"
-                    name="event"
+                    id="title"
+                    name="title"
                     value={data.title}
                     className="border-2 border-gray-300 py-5 focus:ring-primary focus:border-primary"
-                    onChange={(e) => setData("title", e.target.value)}
+                    onChange={handleChange}
                 />
                 <InputError message={errors.title} className="mt-2" />
             </div>
@@ -80,7 +94,7 @@ export default function AddScheduleForm() {
                     name="location"
                     value={data.location}
                     className="border-2 border-gray-300 py-5 focus:ring-primary focus:border-primary"
-                    onChange={(e) => setData("location", e.target.value)}
+                    onChange={handleChange}
                 />
                 <InputError message={errors.location} className="mt-2" />
             </div>
@@ -88,14 +102,19 @@ export default function AddScheduleForm() {
             <div className="flex flex-col gap-2">
                 <Label htmlFor="image">Upload Image</Label>
                 <ImageInput
-                    image={data.image}
+                    image={data.image as File}
                     id="image"
                     name="image"
-                    onChange={handleImageChange}
+                    onChange={handleChange}
                 />
                 <InputError message={errors.image} className="mt-2" />
             </div>
 
+            <ScheduleCreateTable
+                bloodType={BLOOD_TYPES}
+                data={data}
+                onChange={handleBloodStockChange}
+            />
             <Button type="submit" disabled={processing}>
                 Submit
             </Button>

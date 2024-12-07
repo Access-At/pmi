@@ -51,12 +51,16 @@ class DashboardController extends Controller
     if (!$is_admin) return redirect()->route('home');
 
     $schedules = ScheduleService::getSchedulesDashboard($request->input("search"));
-    return Inertia::render('Dashboard/PMI', [
+    return Inertia::render('Dashboard/Schedule/index', [
       'schedules' => $schedules,
     ]);
   }
 
-  // public function createStok() {}
+  public function createSchedule()
+  {
+    return Inertia::render('Dashboard/Schedule/Create');
+  }
+
   // public function updateStok() {}
   // public function deleteStok() {}
 }
