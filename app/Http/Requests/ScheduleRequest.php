@@ -24,21 +24,23 @@ class ScheduleRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'title' => 'required|string',
             'location' => 'required|string',
-            'description' => 'required|string',
-            'image' => [
-                Rule::requiredIf(function () {
-                    return $this->isMethod('post');
-                }),
-                'file',
-                'mimes:png,jpg,jpeg',
-            ],
             'blood_stock' => 'required|array',
-            'blood_stock.*.type' => 'required|in:A+,A-,B+,B-,AB+,AB-,O+,O-,A+,A-,B+,B-,AB+,AB-,O+,O-',
-            'blood_stock.*.category' => 'required|enum_key:' . BloodCategory::class,
-            'blood_stock.*.amount' => 'required|numeric',
+            'blood_stock.*.category' => 'required|string',
+            'blood_stock.*.amounts' => 'required|array',
+            'blood_stock.*.amounts.*' => 'nullable|numeric|min:0',
         ];
+
+        if ($this->hasFile('image')) {
+            $rules['image'] = [
+                'required',
+                'image',
+                'mimes:png,jpg,jpeg',
+            ];
+        }
+
+        return $rules;
     }
 }

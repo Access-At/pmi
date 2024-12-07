@@ -72,6 +72,7 @@ export interface BloodStoks {
         image: string;
         details: Detail;
         totals: Totals;
+        updated: string;
     };
 }
 

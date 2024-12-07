@@ -39,7 +39,6 @@ class ScheduleService
 
         unset($data['blood_stock']);
         $schedule = ScheduleRepository::createSchedule($data);
-
         self::createBloodStockDetails($schedule->id, $bloodStock);
 
         return self::getSchedulesBySlug($schedule->slug);
@@ -67,16 +66,18 @@ class ScheduleService
     private static function createBloodStockDetails(int $scheduleId, array $bloodStock): void
     {
         foreach ($bloodStock as $stock) {
-            $stockDetail = StockDetailRepository::createStockDetail([
-                'blood_type' => $stock['type'],
-                'blood_category' => $stock['category'],
-                'amount' => $stock['amount'],
-            ]);
+            foreach ($stock["amounts"] as $type => $amount) {
+                $stockDetail = StockDetailRepository::createStockDetail([
+                    'blood_type' => $type,
+                    'blood_category' => $stock["category"],
+                    'amount' => $amount,
+                ]);
 
-            ScheduleDetailRepository::createScheduleDetail([
-                'schedule_id' => $scheduleId,
-                'stock_detail_id' => $stockDetail->id,
-            ]);
+                ScheduleDetailRepository::createScheduleDetail([
+                    'schedule_id' => $scheduleId,
+                    'stock_detail_id' => $stockDetail->id,
+                ]);
+            }
         }
     }
 }

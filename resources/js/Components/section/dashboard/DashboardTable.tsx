@@ -1,4 +1,4 @@
-import { ScrollArea } from "@/Components/ui/scroll-area";
+import { ByCategory, ScheduleData } from "@/types";
 import {
     Table,
     TableBody,
@@ -6,10 +6,12 @@ import {
     TableHeader,
     TableRow,
 } from "@/Components/ui/table";
+
 import EachUtil from "@/lib/EachUtil";
 import EventBodyTable from "./EventBodyTable";
 import ScheduleBodyTable from "./ScheduleBodyTable";
-import { ByCategory, ScheduleData } from "@/types";
+import { ScrollArea } from "@/Components/ui/scroll-area";
+import { formatCategory } from "@/lib/utils";
 
 export default function DashboardTable({
     data,
@@ -38,7 +40,9 @@ export default function DashboardTable({
                             <EachUtil
                                 of={bloodCategory}
                                 render={(category) => (
-                                    <TableHead>{category}</TableHead>
+                                    <TableHead title={formatCategory(category)}>
+                                        {category}
+                                    </TableHead>
                                 )}
                             />
                         ) : null}

@@ -1,12 +1,13 @@
-import ImageInput from "@/Components/ImageInput";
-import InputError from "@/Components/InputError";
-import { Button } from "@/Components/ui/button";
-import { Input } from "@/Components/ui/input";
-import { Label } from "@/Components/ui/label";
 import { useForm, usePage } from "@inertiajs/react";
+
+import { Button } from "@/Components/ui/button";
 import { FormEventHandler } from "react";
-import { toast } from "sonner";
+import ImageInput from "@/Components/ImageInput";
+import { Input } from "@/Components/ui/input";
+import InputError from "@/Components/InputError";
+import { Label } from "@/Components/ui/label";
 import ScheduleCreateTable from "./ScheduleCreateTable";
+import { toast } from "sonner";
 
 const BLOOD_CATEGORIES = [
     { category: "AHF", name: "Anti Hemophilic Factor (AHF)" },
@@ -16,7 +17,7 @@ const BLOOD_CATEGORIES = [
     { category: "TC", name: "Thrombocyte Concentrate (TC)" },
 ];
 
-const BLOOD_TYPES = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
+const BLOOD_TYPES = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
 export default function AddScheduleForm() {
     const { flash } = usePage().props;
@@ -37,7 +38,7 @@ export default function AddScheduleForm() {
             amounts: BLOOD_TYPES.reduce(
                 (acc, type) => ({
                     ...acc,
-                    [type]: "",
+                    [type]: 0,
                 }),
                 {}
             ),
@@ -67,10 +68,8 @@ export default function AddScheduleForm() {
 
     const eventSubmit: FormEventHandler = (e) => {
         e.preventDefault();
-        console.log(JSON.stringify(data));
-        // post(route("dashboard.event.store"), {
-        //     onFinish: () => reset(),
-        // });
+        // console.log(JSON.stringify(data));
+        post(route("dashboard.pmi.store"));
     };
 
     return (

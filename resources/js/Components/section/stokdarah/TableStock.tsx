@@ -9,8 +9,8 @@ import {
 
 import { ByBloodType } from "@/types";
 import EachUtil from "@/lib/EachUtil";
-import { usePage } from "@inertiajs/react";
 import { formatCategory } from "@/lib/utils";
+import { usePage } from "@inertiajs/react";
 
 export default function TableStock() {
     const { bloodStoks } = usePage().props;
@@ -148,9 +148,7 @@ export default function TableStock() {
                             </TableBody>
                         </Table>
                     </div>
-                    <p className="text-end px-10">
-                        Di update pada tanggal 20 Oktober 2023
-                    </p>
+                    <p className="text-end px-10">{bloodStoks.data.updated}</p>
                 </div>
             </div>
         </section>

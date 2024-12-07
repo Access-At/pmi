@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +15,8 @@ class ScheduleDetailResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $formatDate = Carbon::parse($this->updated_at)->translatedFormat('d F Y');
+
         $details = $this->details;
 
         $totalByBloodType = collect($details)->groupBy('blood_type')->map(function ($items) {
@@ -38,7 +41,8 @@ class ScheduleDetailResource extends JsonResource
             'details' => $dataTable,
             'totals' => [
                 'by_blood_type' => $totalByBloodType,
-            ]
+            ],
+            'updated' => "Di update pada tanggal $formatDate",
         ];
     }
 }
