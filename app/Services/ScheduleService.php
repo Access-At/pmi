@@ -8,6 +8,7 @@ use App\Http\Resources\ScheduleResource;
 use App\Repositories\ScheduleDetailRepository;
 use App\Repositories\ScheduleRepository;
 use App\Repositories\StockDetailRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 
 class ScheduleService
@@ -44,15 +45,49 @@ class ScheduleService
         return self::getSchedulesBySlug($schedule->slug);
     }
 
-    public static function updateSchedule($slug, $data) {}
+    public static function updateSchedule($slug, array $data)
+    {
+        $schedule = ScheduleRepository::getSchedulesBySlug($slug);
+
+        if (!$schedule) {
+            return ['message' => 'Schedule not found'];
+        }
+
+        $bloodStock = $data['blood_stock'] ?? [];
+        $imageName = $schedule->image;
+
+        // Handle image update
+        if (isset($data['image'])) {
+            // Delete the old image if exists
+            if ($imageName) {
+                Storage::disk('public')->delete('schedules/' . $imageName);
+            }
+            $imageName = self::handleImageUpload($data['image']);
+            $data['image'] = $imageName;
+        }
+
+        // Unset blood_stock from the data array
+        unset($data['blood_stock']);
+
+        // Update the schedule
+        ScheduleRepository::updateSchedule($schedule->id, $data);
+
+        // remove old blood stock
+        $scheduleDetails = ScheduleDetailRepository::getScheduleDetail($schedule->id);
+        self::removeBloodStockDetails($scheduleDetails);
+
+        // create new blood stock
+        self::createBloodStockDetails($schedule->id, $bloodStock);
+        return self::getSchedulesBySlug($schedule->slug);
+    }
+
 
     public static function deleteSchedule(string $slug)
     {
         $scheduleId = ScheduleRepository::getSchedulesBySlug($slug)->id;
         $scheduleDetails = ScheduleDetailRepository::getScheduleDetail($scheduleId);
-        $stockDetailIds = $scheduleDetails->pluck('stock_detail_id');
 
-        StockDetailRepository::deleteStockDetail($stockDetailIds);
+        self::removeBloodStockDetails($scheduleDetails);
         return ScheduleRepository::deleteSchedule($slug);
     }
 
@@ -61,6 +96,12 @@ class ScheduleService
         $imageName = uniqid() . '_' . time() . '.' . $image->extension();
         Storage::disk('public')->putFileAs('schedules', $image, $imageName);
         return $imageName;
+    }
+
+    private static function removeBloodStockDetails(Collection $scheduleDetails): void
+    {
+        $stockDetailIds = $scheduleDetails->pluck('stock_detail_id');
+        StockDetailRepository::deleteStockDetail($stockDetailIds);
     }
 
     private static function createBloodStockDetails(int $scheduleId, array $bloodStock): void

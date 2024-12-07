@@ -6,9 +6,10 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/Components/ui/carousel";
+import { Link, usePage } from "@inertiajs/react";
+
 import EachUtil from "@/lib/EachUtil";
 import { ScheduleData } from "@/types";
-import { Link, usePage } from "@inertiajs/react";
 
 export default function JadwalDonorSection() {
     const { schedules } = usePage().props;
@@ -24,7 +25,7 @@ export default function JadwalDonorSection() {
             >
                 <CarouselContent className="-ml-2 md:-ml-4">
                     <EachUtil
-                        of={schedules.data}
+                        of={schedules.data as unknown as ScheduleData[]}
                         render={(item: ScheduleData, index) => (
                             <CarouselItem
                                 className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"

@@ -44,7 +44,7 @@ class ScheduleRepository
 
     public static function updateSchedule($id, $data)
     {
-        $schedule = Schedule::where('slug', $id)->first();
+        $schedule = Schedule::where('id', $id)->first();
         return $schedule->update($data);
     }
 

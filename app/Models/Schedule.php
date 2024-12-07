@@ -22,6 +22,11 @@ class Schedule extends Model
 
             $data->slug = $slug;
         });
+
+        static::updating(function ($data) {
+            $slug = Str::slug($data->title);
+            $data->slug = $slug;
+        });
     }
 
     public function details()

@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Schedule;
 use App\Models\StockDetail;
 
 class StockDetailRepository
@@ -18,6 +17,16 @@ class StockDetailRepository
         $stockDetail = StockDetail::create($data);
         return $stockDetail;
     }
+
+    public static function createOrUpdateStockDetail($data)
+    {
+        $stockDetail = StockDetail::updateOrCreate([
+            'schedule_id' => $data['schedule_id'],
+            'blood_type_id' => $data['blood_type_id'],
+        ]);
+        return $stockDetail;
+    }
+
 
     public static function updateStockDetail($id, $amount)
     {

@@ -1,13 +1,12 @@
-import { Notifications } from "@/types";
-import { usePage } from "@inertiajs/react";
 import { CalendarDaysIcon } from "lucide-react";
 import EachUtil from "@/lib/EachUtil";
-import { divIcon } from "leaflet";
+import { Notifications } from "@/types";
 import { ScrollArea } from "./ui/scroll-area";
+import { divIcon } from "leaflet";
+import { usePage } from "@inertiajs/react";
 
 export default function NotificationComponents() {
     const { notifications } = usePage().props;
-    console.log(notifications);
     return notifications.data.length <= 0 ? (
         <div className="flex flex-col items-center justify-center gap-4">
             <img src="/assets/images/Notifikasi.png" alt="notifikasi" />

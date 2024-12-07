@@ -68,8 +68,9 @@ export default function EditScheduleForm() {
 
     const eventSubmit: FormEventHandler = (e) => {
         e.preventDefault();
-        console.log(data);
-        // post(route("dashboard.pmi.store"));
+
+        const slug = schedules.data.slug;
+        post(route("dashboard.pmi.update", slug));
     };
 
     return (
