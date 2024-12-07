@@ -20,7 +20,6 @@ export interface EventDetail {
 }
 
 export interface EventData {
-    id(id: any): unknown;
     title: string;
     slug: string;
     description: string;
@@ -35,7 +34,7 @@ export interface EventData {
 }
 
 export interface Schedules {
-    data: ScheduleData[];
+    data: ScheduleData;
 }
 
 export interface ScheduleData {

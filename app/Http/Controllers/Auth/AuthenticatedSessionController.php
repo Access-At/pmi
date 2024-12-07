@@ -16,7 +16,7 @@ class AuthenticatedSessionController extends Controller
   protected function authenticated(Request $request, $user)
   {
     if ($user->role === 'admin') {
-      return redirect()->intended(route('dashboard', absolute: false));
+      return redirect()->intended(route('dashboard.event', absolute: false));
     }
 
     return redirect()->intended(route('home', absolute: false));

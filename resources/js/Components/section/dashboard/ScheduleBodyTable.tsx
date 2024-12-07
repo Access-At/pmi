@@ -1,8 +1,8 @@
 import { TableRow, TableCell } from "@/Components/ui/table";
 import EachUtil from "@/lib/EachUtil";
 import { ByCategory, ScheduleData } from "@/types";
-import { router } from "@inertiajs/react";
-import { Button } from "@/Components/ui/button";
+import { Link, router } from "@inertiajs/react";
+import { Button, buttonVariants } from "@/Components/ui/button";
 import EditDashboard from "./EditDashboard";
 import {
     HoverCard,
@@ -10,7 +10,7 @@ import {
     HoverCardTrigger,
 } from "@/Components/ui/hover-card";
 import { Separator } from "@/Components/ui/separator";
-import { formatCategory } from "@/lib/utils";
+import { cn, formatCategory } from "@/lib/utils";
 
 export default function ScheduleBodyTable({ data }: { data: ScheduleData[] }) {
     const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
@@ -63,22 +63,21 @@ export default function ScheduleBodyTable({ data }: { data: ScheduleData[] }) {
                         }}
                     />
                     <TableCell className="text-right space-x-2 space-y-2">
-                        <Button
-                            size="sm"
-                            className="bg-cyan-300/50 hover:bg-cyan-300 text-cyan-600 hover:text-white"
+                        <Link
+                            href={route("dashboard.pmi.edit", schedule.slug)}
+                            className={cn(
+                                buttonVariants({ size: "sm" }),
+                                "bg-cyan-300/50 hover:bg-cyan-300 text-cyan-600 hover:text-white"
+                            )}
                         >
                             Update
-                        </Button>
-                        {/* <EditDashboard schedule scheduleData={schedule} /> */}
+                        </Link>
                         <Button
                             size="sm"
                             className="bg-primary/30 hover:bg-primary text-red-600 hover:text-white"
                             onClick={() => {
                                 router.delete(
-                                    route(
-                                        "dashboard.event.delete",
-                                        schedule.slug
-                                    )
+                                    route("dashboard.pmi.delete", schedule.slug)
                                 );
                             }}
                         >

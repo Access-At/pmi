@@ -9,18 +9,11 @@ import { Label } from "@/Components/ui/label";
 import ScheduleCreateTable from "./ScheduleCreateTable";
 import { toast } from "sonner";
 
-const BLOOD_CATEGORIES = [
-    { category: "AHF", name: "Anti Hemophilic Factor (AHF)" },
-    { category: "FFP", name: "Fresh Frozen Plasma (FFP)" },
-    { category: "PCLR", name: "Packed Red Cell Leuko Reduce (PCLR)" },
-    { category: "PC", name: "Packed Red Cell (PC)" },
-    { category: "TC", name: "Thrombocyte Concentrate (TC)" },
-];
-
-const BLOOD_TYPES = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
-
-export default function AddScheduleForm() {
-    const { flash } = usePage().props;
+export default function EditScheduleForm() {
+    const { flash, schedules } = usePage().props;
+    const { title, location, image } = schedules.data;
+    const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+    const bloodCategory = ["AHF", "FFP", "PCLR", "PC", "TC"];
     const {
         data,
         setData,
@@ -30,15 +23,15 @@ export default function AddScheduleForm() {
         reset,
         recentlySuccessful,
     } = useForm({
-        title: "",
-        location: "",
-        image: null as File | null,
-        blood_stock: BLOOD_CATEGORIES.map((item) => ({
-            category: item.category,
-            amounts: BLOOD_TYPES.reduce(
+        title,
+        location,
+        image: image as unknown as File,
+        blood_stock: bloodCategory.map((categoty) => ({
+            category: categoty,
+            amounts: bloodTypes.reduce(
                 (acc, type) => ({
                     ...acc,
-                    [type]: 0,
+                    [type]: schedules.data.details[categoty as any][type] || 0,
                 }),
                 {}
             ),
@@ -75,7 +68,8 @@ export default function AddScheduleForm() {
 
     const eventSubmit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("dashboard.pmi.store"));
+        console.log(data);
+        // post(route("dashboard.pmi.store"));
     };
 
     return (
@@ -116,7 +110,7 @@ export default function AddScheduleForm() {
             </div>
 
             <ScheduleCreateTable
-                bloodType={BLOOD_TYPES}
+                bloodType={bloodTypes}
                 data={data}
                 onChange={handleBloodStockChange}
             />
