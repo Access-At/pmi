@@ -10,7 +10,7 @@ export default function PMI() {
             <h1 className="text-4xl text-center font-bold mb-8">Daftar PMI</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <EachUtil
-                    of={schedules.data}
+                    of={schedules.data as unknown as ScheduleData[]}
                     render={(item: ScheduleData, index) => (
                         <Link href={route("stok", item.slug)} key={index}>
                             <div className="relative transform transition-transform hover:scale-105">
